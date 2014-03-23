@@ -1,0 +1,39 @@
+<?php $array_digit = str_split($this->httpcode); ?> 
+<div class="code-error-wrapper main-color">
+    <div class="code-error">
+        <?php foreach($array_digit as $digit) : ?>
+        
+        <?php if($digit == '0'): ?>
+        <span class="display_0">0</span>
+        <?php else :?>
+        <span class="display_digit"><?php echo($digit); ?></span>
+        <?php endif; ?>
+        
+        <?php endforeach; ?>
+    </div>
+
+    <p class="message-error bigger">
+    <?php echo $this->message; ?>
+    </p>
+</div>
+
+<?php if (isset($this->exception) && ini_get('display_errors')): ?>
+<div class="report-error">
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
+
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>detail:</h3>
+  <pre><?php echo $this->exception->__toString(); ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo var_export($this->request->getParams(), true) ?>
+  </pre>
+</div>
+ <?php endif ?>

@@ -1,0 +1,10 @@
+<?php if ($this->entities)  : ?>
+<textarea style="width: 50%;margin:0 auto; height:500px;">
+<?php print htmlentities($this->layout()->content); ?>
+</textarea>
+
+<?php else  : ?>
+
+<?php print $this->layout()->content; ?>
+
+<?php endif ; ?>

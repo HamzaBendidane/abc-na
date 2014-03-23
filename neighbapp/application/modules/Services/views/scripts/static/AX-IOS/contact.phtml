@@ -1,0 +1,58 @@
+<div class="tuto">
+
+	<div class="title container dark">
+		<h1 class="h1">
+			<span class="separator"><span class="hr"></span></span> <span class="text ico"><?php echo(_('Contact us'));?>
+			</span> <span class="separator"><span class="hr"></span></span>
+		</h1>
+	</div>
+
+	<?php if(!$this->issend):?>
+	
+	<div class="container">
+	    
+	    <form action="" method="POST">
+	    
+	    <label for="message">
+	        Please enter your message here :
+	    </label>
+	    <br>
+	    <textarea name="message" id="message" style="width:100%;height:200px;">
+	        
+	    </textarea>
+	    <input type="submit" value="Send" style="width:100%;padding:5px 0;margin-top:1em;" />
+	    
+	    <input type="hidden" name="issend" value="1" />
+	    
+	    </form>
+		
+	</div>
+	<?php else : ?>
+	
+	<div class="container">
+		<p>your message has been send</p>
+	</div>
+	<?php endif; ?>
+	<br><br>
+	<div class="container">
+<strong>to take part in an investigation?</strong> 
+<p>
+When a new investigation is available, you will be notified by our push notifications
+To take part in an investigation:
+
+- Go to AppXpert and answer the multiple choice questionnaire.
+
+There you go, your investigation is complete! Now you only have to wait for its confirmation.
+It can take up to 24 hours for your investigation to be approved.
+</p>
+<strong>to activate your push notifications?</strong> 
+<p>
+You still haven't turned on push notifications ?
+
+It's really easy !
+
+On your iPhone, go to Settings > Notifications > appXpert
+</p>
+	</div>
+	
+</div>

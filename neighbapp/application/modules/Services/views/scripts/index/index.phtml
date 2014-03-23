@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>Web Service Serveur</title>
+	<link rel="stylesheet" href="/Services/Soap/Css/doc.css" type="text/css">
+</head>
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+
+<div id="center-rnd-bar"></div><div id="left-rnd-bar"></div><div id="rigth-rnd-bar"></div>
+<div id="main">
+<div id="mainpadded">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td>
+    <ul>
+    <?php foreach ($this->controllers as $controller => $url):?>
+    	<li><a href="<?php echo $url;?>"><?php echo $controller;?></a></li>
+   	<?php endforeach;?>
+    </ul>
+</td>
+</tr>
+</table>
+</div><div class="footer">WEB SERVICE - sk</div>
+</div>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+</body>
+</html>

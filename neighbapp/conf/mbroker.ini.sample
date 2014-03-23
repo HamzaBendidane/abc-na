@@ -1,0 +1,23 @@
+[base]
+port = 61613
+host = mbroker.0pb.org
+
+log.writerName             = "Stream"
+; Format de timestamp utilisé pour formé le nom
+log.writerParams.timestamp = "Y-m-d-H"
+log.writerParams.stream = "/srv/log/cfe/async.0pb.org/%timestamp%-event.log"
+log.writerNamespace = "Cfe_Log_Writer"
+log.formatterName          = "Simple"
+log.formatterParams.format = "%message%
+"
+[prod : base]
+
+[ppr : base]
+host = mbroker.ppr.0pb.org
+[stg : base]
+host = mbroker.stg.0pb.org
+[int : base]
+host = mbroker.int.0pb.org
+[dev : base]
+host = mbroker.dev.0pb.org
+log.writerParams.stream = "/srv/log/cfe/async.0pb.org/%timestamp%-event.log"

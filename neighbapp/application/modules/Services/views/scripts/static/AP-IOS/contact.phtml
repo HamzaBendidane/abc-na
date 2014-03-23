@@ -1,0 +1,35 @@
+<div class="tuto">
+
+	<div class="title container dark">
+		<h1 class="h1">
+			<span class="separator"><span class="hr"></span></span> <span class="text ico"><?php echo(_('Nous contacter'));?>
+			</span> <span class="separator"><span class="hr"></span></span>
+		</h1>
+	</div>
+
+	<?php if(!$this->issend):?>
+	
+	<div class="container">
+	    
+	    <form action="" method="POST">
+	    
+	    <label for="message">
+	        Votre message:
+	    </label>
+	    <br>
+	    <textarea name="message" id="message" style="width:100%;height:200px;">
+	        
+	    </textarea>
+	    <input type="submit" value="Envoyer" style="width:100%;padding:5px 0;margin-top:1em;" />
+	    
+	    <input type="hidden" name="issend" value="1" />
+	    
+	    </form>
+		
+	</div>
+	<?php else : ?>
+	
+	<div class="container">
+		<p>Message envoyé</p>
+	</div>
+	<?php endif; ?>

@@ -1,0 +1,14 @@
+[prod]
+login = "billing-async"
+password = "billing-async-pwd"
+
+[ppr : prod]
+login = "billing-async"
+password = "billing-async-pwd"
+
+[stg : ppr]
+[int : ppr]
+
+[dev : prod]
+login = "billing-async"
+password = "billing-async-pwd"

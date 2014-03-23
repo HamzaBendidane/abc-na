@@ -1,0 +1,167 @@
+<!-- BEGIN: main -->
+<!-- BEGIN: htmlheader -->
+<html>
+<head>
+	<title>Web Service Serveur</title>
+	<link rel="stylesheet" href="/Services/Soap/Css/doc.css" type="text/css">
+</head>
+<body>
+<!-- END: htmlheader -->
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+
+<div id="center-rnd-bar"></div><div id="left-rnd-bar"></div><div id="rigth-rnd-bar"></div>
+<div id="main">
+
+<div id="mainpadded">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td align=left width="29%">
+<table border="0" cellpadding="0" cellspacing="0"  width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+	<h1><?php echo $this->service->name?></h1>
+	<div class="control"><a href="<?php echo $this->service->wadl?>"><img src="/Services/Soap/Images/view.gif">WADL</a></div>
+	<div class="control"><a href="<?php echo $this->service->stubPHP?>"><img src="/Services/Soap/Images/download.gif">Stub PHP</a></div>
+	<div class="control"><a href="<?php echo $this->service->test?>"><img src="/Services/Soap/Images/help.gif">Test</a></div>
+	<h2>Services</h2>
+	<?php foreach ($this->services as $service => $url):?>
+	<a href="<?php echo $url?>"><?php echo $service?></a><br>
+	<?php endforeach;?>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+</td>
+<td align=right width="2%"></td>
+<td class="header" align=right width="68%">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+	<h2>Full description</h2>
+	<p><?php echo $this->class->fullDescription?></p>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+</td>
+<td width="1%"></td>
+ </tr>
+</table>
+
+<br/>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+
+<td id="content">
+
+	<?php if (!empty($this->class->constants)):?>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+	<h2>Constants -
+	<select id="constantlist" onchange="document.location.href=('#constant_'+this.options[this.selectedIndex].value)">
+	<?php foreach ($this->class->constants as $constant):?>
+	<option value="<?php echo $constant->name?>"><?php echo $constant->name?></option>
+	<?php endforeach;?>
+	</select>
+	</h2>
+	<table class="constant" cellpadding="0" cellspacing="4">
+        <?php foreach ($this->class->constants as $constant):?>
+		<tr>
+			<td class="constantname">
+			    <a name="constant_<?php echo $constant->name;?>"></a>
+			    <?php echo $constant->name;?>
+			</td>
+			<td class="constantequal">=</td>
+			<td class="constantvalue"><?php echo var_export($constant->value,true);?></td>
+		</tr>
+		<?php endforeach;?>
+	</table>
+	<br/>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+	<?php endif;?>
+
+	<?php if (!empty($this->class->properties)):?>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+	<h2>Properties -
+	<select id="constantlist" onchange="document.location.href=('#constant_'+this.options[this.selectedIndex].value)">
+	<?php foreach ($this->class->properties as $property):?>
+	<option value="<?php echo $property->name?>"><?php echo $property->name?></option>
+	<?php endforeach;?>
+	</select>
+	</h2>
+	<?php foreach ($this->class->properties as $key => $property):?>
+	<a name="property_<?php echo $property->name;?>"></a>
+	<table class="method" cellpadding="0" cellspacing="2">
+		<tr><td class="propertyname"><?php echo $property->name;?></td></tr>
+		<tr><td>
+		<table class="property<?php echo $key%2;?>" cellpadding="0" cellspacing="1">
+		<tr class="info"><td class="label">Description</td><td class="value">{fullDescriptionExt}</td></tr>
+		<tr class="info"><td class="label">Type</td><td class="value">{typeExt}</td></tr>
+		</table>
+		</td></tr>
+	</table>
+	<br/>
+	<?php endforeach;?>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+	<?php endif;?>
+
+
+	<?php if (!empty($this->class->methods)):?>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr> <td class="b-box-top-left"></td> <td class="b-box-top-middle"></td> <td class="b-box-top-right"></td> </tr>
+<tr><td class="b-box-middle-left"></td><td>
+	<h2>Methods -
+	<select id="methodlist" onchange="document.location.href=('#method_'+this.options[this.selectedIndex].value)">
+	<?php foreach ($this->class->methods as $key => $method):?>
+	<option value="<?php echo $method->name?>"><?php echo $method->name?></option>
+	<?php endforeach;?>
+	</select>
+	</h2>
+	<?php foreach ($this->class->methods as $key => $method):?>
+	<a name="method_<?php echo $method->name;?>"></a>
+	<table class="method" cellpadding="0" cellspacing="2">
+		<tr><td class="methodname"><?php echo $method->fullName;?></td></tr>
+		<tr><td>
+		<table class="method<?php echo $key%2;?>" cellpadding="1" cellspacing="1">
+		<tr class="info"><td class="label">Description</td><td class="value"><?php echo $method->fullDescriptionExt;?></td></tr>
+		<tr><td/></tr>
+		<tr class="info"><td class="label">Parameters</td><td class="value"><?php echo $method->paramExt;?></td></tr>
+		<tr><td/></tr>
+		<tr class="info"><td class="label">Returns</td><td class="value"><?php echo $method->returnExt;?><br/><?php echo $method->throwsExt;?></td></tr><tr/>
+		<tr><td/></tr>
+		<tr class="info"><td class="label">Test</td><td class="value"><?php echo $method->testExt;?></td></tr>
+		</table>
+		</td></tr>
+	</table>
+	<br/>
+	<?php endforeach;?>
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+	<?php endif;?>
+
+</td>
+<td width="1%"></td>
+</tr>
+</table>
+</div>
+
+<div class="footer">WEB SERVICE - sk</div>
+</div>
+<!-- BEGIN: htmlfooter -->
+</td><td class="b-box-middle-right"></td> </tr>
+<tr> <td class="b-box-bottom-left"></td> <td class="b-box-bottom-middle"></td> <td class="b-box-bottom-right"></td> </tr>
+</table>
+</body>
+</html>
+<!-- END: htmlfooter -->
+<!-- END: main -->

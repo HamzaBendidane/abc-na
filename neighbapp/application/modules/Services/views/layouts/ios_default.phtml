@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<?php
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle(_('AppXpert')); ?>
+<html lang="<?php echo($this->lang); ?>">
+<head>
+<meta charset="utf-8">
+<?php echo $this->headTitle(); ?>
+<meta name="viewport" content="initial-scale=1">
+<meta http-equiv="cleartype" content="on">
+<meta name="apple-mobile-web-app-title"	content="<?php echo(_("AppXpert")); ?>">
+<link rel="stylesheet" href="<?php echo $this->baseUrl()?>/assets/css/themes/ios/<?php echo $this->plateform ?>/styles.css" />
+</head>
+<body>
+	<div data-role="page" id="page">
+
+		<div data-role="content">
+			<?php echo $this->layout()->content; ?>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style type="text/css">
+body {
+    font-family: 'Questrial', sans-serif;
+    margin: 0;
+    height: auto;
+    width: auto;
+}
+
+.myshadow {
+    box-shadow: 1px 1px 5px #555;
+    -webkit-box-shadow: 1px 1px 5px #555;
+}
+
+p {
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#nomApp {
+   color: #FFFFFF;
+    font-size: 10px;
+    left: 46px;
+    position: relative;
+    top: 98px;
+}
+
+#nomApp h2, #nomApp h3 {
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 5px;
+}
+
+#nomApp h2 {
+    font-size: 22px;
+}
+
+#nomApp h3 {
+    font-size: 14px;
+}
+
+.logo {
+    top: 95px;
+    width: 55px;
+    height: 55px;
+    position: relative;
+    left: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.logo img {
+    width: 100%;
+}
+
+#header .logo, #header #nomApp {
+    float: left;
+}
+
+#header {
+    width: 320px;
+    height: 202px;
+    background: #fff url("http://ws.get-reach.com/assets/css/themes/appduweek/ap-ios/img/header_app_du_week.jpg") no-repeat;
+    background-size: 320px 202px;
+}
+
+#download {
+    position: relative;
+    top: 160px;
+    height: 35px;
+    left: 80px;
+    width: 156px;
+}
+ /*.scrollable, */
+.slider {
+    background-color: #ccc;
+    width: 320px;
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    text-align: center;
+    float: left;
+    white-space: nowrap;
+}
+
+div .slider {
+    margin: 20px;
+}
+
+.slide {
+    display: inline-block;
+    margin: 20px 10px;
+}
+
+div.horizontal .slide {
+    margin: 20px 10px;
+}
+
+div.horizontal div.first {
+    margin-left: 20px;
+}
+
+div.vertical .slide {
+    margin: 20px 20px;
+}
+
+div.vertical div.first {
+    margin-left: 40px;
+}
+ /* slider container */
+.slide img.vertical {
+    height: 260px;
+    width: 180px;
+}
+
+.slide img.horizontal {
+    height: 180px;
+}</style>
+</head>
+<body>
+	<div id="header">
+		<div class="logo">
+			<img src="<?php echo $this->data[0]; ?>"
+				class="myshadow" />
+		</div>
+		<div id="nomApp">
+			<h3><?php echo $this->data['appname']; ?></h3>
+			<h4><?php echo $this->data['editeur']; ?></h4>
+		</div>
+		<a href="<?php echo $this->data['tracking_link']; ?>"
+			title="Download App"><div id="download"></div></a>
+	</div>
+	<div class="slider">
+		<div class="slide first-horizontal">
+			<img src="<?php echo $this->data[1]; ?>"
+				alt="" class="myshadow horizontal" />
+		</div>
+		<div class="slide">
+			<img src="<?php echo $this->data[2]; ?>"
+				alt="" class="myshadow horizontal" />
+		</div>
+		<div class="slide">
+			<img src="<?php echo $this->data[3]; ?>"
+				alt="" class="myshadow horizontal" />
+		</div>
+		<div class="slide">
+			<img src="<?php echo $this->data[4]; ?>"
+				alt="" class="myshadow horizontal" />
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+

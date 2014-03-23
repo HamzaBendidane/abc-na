@@ -1,0 +1,13 @@
+Fichiers de langues :
+
+Les fichiers à la racine du dossier languages servent aux mises à jours provenant des scripts PHP
+(NB : la mise à jour de ses fichiers seront automatisés)
+
+Les fichiers PO dans les dossiers de chaque langue doivent être mis à jour seulement depuis les fichiers .pot
+
+
+UN fichier POT par Module : Web (webapp),  Sites (sites internet),  default (Webservices et pages statiques)
+
+default : que les webservices
+Sites : webservices et Sites
+Webapp : webservices et Webapp

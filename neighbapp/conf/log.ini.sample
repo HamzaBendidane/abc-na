@@ -1,0 +1,55 @@
+[base]
+
+log0.writerName = "Stream"
+log0.writerNamespace = "Cfe_Log_Writer"
+log0.writerParams.stream = LOG_PATH "/%timestamp%-error.log"
+log0.writerParams.timestamp = "Y-m-d"
+log0.formatterName = "Simple"
+log0.formatterParams.format = "%timestamp% %priorityName% : %message%
+"
+log0.filterName = "Priority"
+log0.filterParams.priority = 4 ; WARN
+
+
+log1.writerName = "Stream"
+log1.writerNamespace = "Cfe_Log_Writer"
+log1.writerParams.stream =  LOG_PATH "/%timestamp%-sync-accounting-provider.log"
+log1.writerParams.timestamp = "Y-m-d"
+log1.formatterName = "Simple"
+log1.formatterParams.format = "%timestamp% %priorityName% : %message%
+"
+log1.filterName = "Message"
+log1.filterParams.regexp = "/^SYNC ACC PROVIDER.*/"
+
+
+log2.writerName = "Stream"
+log2.writerNamespace = "Cfe_Log_Writer"
+log2.writerParams.stream =  LOG_PATH "/%timestamp%-sync-provider-accounting.log"
+log2.writerParams.timestamp = "Y-m-d"
+log2.formatterName = "Simple"
+log2.formatterParams.format = "%timestamp% %priorityName% : %message%
+"
+log2.filterName = "Message"
+log2.filterParams.regexp = "/^SYNC PROVIDER ACC.*/"
+
+;############################# END OF MAIN CONFIG ##############################
+[prod : base]
+
+
+
+;############################# END OF [prod : base] SETTINGS ##############################
+[ppr : base]
+
+log0.filterParams.priority = 7 ; NOTICE
+
+[int : ppr]
+
+[stg : ppr]
+
+
+;############################ END OF [ppr : base] SETTINGS #####################
+[dev : ppr]
+
+log0.filterParams.priority = 7 ; DEBUG
+
+;############################ END OF [dev : ppr] SETTINGS #####################
