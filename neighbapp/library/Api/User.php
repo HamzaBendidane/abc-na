@@ -28,7 +28,7 @@ class Api_User extends Api_Abstract {
         $emailExist = $userValidation->emailExist($email);
         
         if($emailExist){
-            return array("message"   => "Pseudo Allready used");
+            return array("message"   => "Email Allready used");
         }
         
         // on save le user
