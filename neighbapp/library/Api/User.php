@@ -49,4 +49,29 @@ class Api_User extends Api_Abstract {
         
         return array("success" => true);
     }
+    
+    /**
+     * User Login 
+     * @param string $login
+     * @param string $password
+     * @param string $longitude
+     * @param string $latitude 
+     * @return array
+     */
+    public function Login($login,$password,$longitude,$latitude){
+        $userModel = new Class_Db_User();
+        
+        $checkUser = $userModel->checkLogin($login);
+        if($checkUser == false){
+            return array("message"   => "Login does not exist");
+        }
+        
+        
+        $user = $userModel->GetUserByLogin($login,$password);
+        if($user == false){
+            return array("message"   => "Wrong password");
+        }
+        
+        return array("success" => 1, "data" => $user);
+    }
 }

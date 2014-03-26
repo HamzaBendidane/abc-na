@@ -25,7 +25,6 @@ class Class_Db_User extends Class_Db_Abstract {
         return ($emailExist)?true:false;
     }
     
-    
     /**
      * Creation of User
      * @param Array $data
@@ -36,6 +35,38 @@ class Class_Db_User extends Class_Db_Abstract {
         $this->getAdapter()->insert($this->_name,$data);
         
         return $this->getAdapter()->lastInsertId();
+    }
+    
+    /**
+     * Check if login is already used or not
+     * @param string login
+     * @return boolean 
+     */
+    public function checkLogin($login){
+        
+        $queryLogin = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->where('login = ?',$login);
+        $loginExist =  $this->getAdapter()->fetchRow($queryLogin);
+        
+        return ($loginExist)?true:false;
+    }
+    
+    /**
+     * Get user by login and password
+     * @param string $login
+     * @param string $password
+     * @return boolean 
+     */
+    public function GetUserByLogin($login,$password){
+        
+        $queryLogin = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->where('login = ?',$login)
+                ->where('password = ?',$password);
+        $loginExist =  $this->getAdapter()->fetchRow($queryLogin);
+        
+        return ($loginExist)?$loginExist:false;
     }
     
 }
