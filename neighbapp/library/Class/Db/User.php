@@ -32,9 +32,18 @@ class Class_Db_User extends Class_Db_Abstract {
      */
     public function createUser($data){
         
-        $this->getAdapter()->insert($this->_name,$data);
+        try {
+            $creation = $this->getAdapter()->insert($this->_name,$data);
+            if($creation === 1){
+                return $this->getAdapter()->lastInsertId();
+            }else{
+                return false;
+            }
+        } catch (Exception $exc) {
+            return false;
+        }
+
         
-        return $this->getAdapter()->lastInsertId();
     }
     
     /**
@@ -67,6 +76,27 @@ class Class_Db_User extends Class_Db_Abstract {
         $loginExist =  $this->getAdapter()->fetchRow($queryLogin);
         
         return ($loginExist)?$loginExist:false;
+    }
+    
+    /**
+     * Update User Information
+     * @param array $aData
+     * @param int $userId
+     * @return boolean 
+     */
+    public function updateUser($aData,$userId){
+        
+        try {
+            $where = "id = $userId";
+            $update = $this->getAdapter()->update($this->_name,$aData,$where);
+            if($update === 1){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception $exc) {
+            return false;
+        }
     }
     
 }

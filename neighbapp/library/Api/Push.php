@@ -12,7 +12,6 @@ class Api_Push extends Api_Abstract{
     
 	
     /**
-     *
      * Create a device in push_device
      * @param type $task
      * @param type $appname
@@ -27,23 +26,16 @@ class Api_Push extends Api_Abstract{
      * @param type $adid
      * @param type $mac_addr
      * @param type $vendorid
-     * @return int 
+     * @return array 
      */
     public function apns($task,$appname,$appversion,$devicetoken,$devicename,
-                           $devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$adid = "", $mac_addr =false,$vendorid="" ){
+                           $devicemodel,$deviceversion,$pushbadge,$pushalert,
+                            $pushsound,$adid = "", $macAdress =false,$vendorID=""){
         $data = array();
         
         $pushModel = new Class_Db_Push_Ios_Device();
-       
-        if ($appname == "RSSFluxFR") {
-        	
-        	$pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
-        			$devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$mac_addr,$adi,$vendorid);
-        }else {
-        	
-        	$pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
-        			$devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$macAdress,$adid,$vendorID);
-        }
+        $pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
+                        $devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$macAdress,$adid,$vendorID);
  		
        
        

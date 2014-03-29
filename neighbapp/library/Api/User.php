@@ -47,7 +47,12 @@ class Api_User extends Api_Abstract {
         
         $createUser = $userModel->createUser($dataInsert);
         
-        return array("success" => true);
+        if($createUser !== false){
+            return array("success" => 1);
+        }else{
+            return array("success" => 0 , "Error" => "Error Database");
+        }
+        
     }
     
     /**
@@ -61,17 +66,33 @@ class Api_User extends Api_Abstract {
     public function Login($login,$password,$longitude,$latitude){
         $userModel = new Class_Db_User();
         
+        /** Check if login exist in our database **/
         $checkUser = $userModel->checkLogin($login);
         if($checkUser == false){
             return array("message"   => "Login does not exist");
         }
         
         
+        /** Check login/password in database **/
         $user = $userModel->GetUserByLogin($login,$password);
         if($user == false){
             return array("message"   => "Wrong password");
         }
         
+        
+        /** Update user position in our database **/
+        $aData = array(
+            'longitude' =>  $longitude,
+            'latitude'  =>  $latitude,
+        );
+        
+        $userUpdate = $userModel->updateUser($aData,$user['id']);
+        
+        if($userUpdate === true){
+            $user['longitude'] = $longitude;
+            $user['latitude'] = $latitude;
+        }
+        
         return array("success" => 1, "data" => $user);
-    }
+    }   
 }
