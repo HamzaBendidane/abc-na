@@ -18,10 +18,11 @@ class Api_User extends Api_Abstract {
      * @param float  $latitude
      * @param int    $rating
      * @param string $email
+     * @param string $adid
      * @return Array 
      */
-    public function CreateUser($device_id, $device_type, $first_name, $last_name, $login, $password, $longitude, $latitude, $rating, $email){
-        
+    public function CreateUser($device_id, $device_type, $first_name, $last_name, $login, $password, $longitude, $latitude, $rating, $email,$adid){
+
         $userModel = new Class_Db_User();
         $userValidation = new Class_Validation_User();
         
@@ -48,6 +49,8 @@ class Api_User extends Api_Abstract {
         $createUser = $userModel->createUser($dataInsert);
         
         if($createUser !== false){
+            $deviceModel = new Class_Db_Push_Ios_Device();
+            $updadeDevice = $deviceModel->updateDeviceByAdid(array('user_FK' => $createUser), $adid);
             return array("success" => 1);
         }else{
             return array("success" => 0 , "Error" => "Error Database");

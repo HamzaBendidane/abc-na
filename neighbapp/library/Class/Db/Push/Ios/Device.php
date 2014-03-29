@@ -66,5 +66,27 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
 
         return true;
     }
+    
+    
+    /**
+     * Update Device by adid
+     * @param type $aData
+     * @param type $adid
+     * @return boolean 
+     */
+    public function updateDeviceByAdid($aData,$adid){
+        
+        try {
+            $where = "advertisingId = '$adid'";
+            $update = $this->getAdapter()->update($this->_name,$aData,$where);
+            if($update === 1){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception $exc) {
+            return false;
+        }
+    }
 
 }

@@ -24,7 +24,7 @@ class Api_Push extends Api_Abstract{
      * @param type $pushalert
      * @param type $pushsound
      * @param type $adid
-     * @param type $mac_addr
+     * @param type $macAdress
      * @param type $vendorid
      * @return array 
      */
