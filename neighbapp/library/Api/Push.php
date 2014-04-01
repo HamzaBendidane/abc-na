@@ -30,12 +30,12 @@ class Api_Push extends Api_Abstract{
      */
     public function apns($task,$appname,$appversion,$devicetoken,$devicename,
                            $devicemodel,$deviceversion,$pushbadge,$pushalert,
-                            $pushsound,$adid = "", $macAdress =false,$vendorID=""){
+                            $pushsound,$adid = "", $macaddress =false,$vendorID=""){
         $data = array();
         
         $pushModel = new Class_Db_Push_Ios_Device();
         $pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
-                        $devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$macAdress,$adid,$vendorID);
+                        $devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$macaddress,$adid,$vendorID);
  		
        
        
