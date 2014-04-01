@@ -12,59 +12,66 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
 
     public function insertDevice($task, $appname, $appversion, $deviceuid, $devicetoken, $devicename, $devicemodel, $deviceversion, $pushbadge, $pushalert, $pushsound, $macAdress, $adid, $vendorID) {
 
-        $queryDevice = $this->getAdapter()->select()
-                ->from($this->_name)
-                ->where("advertisingId = ?", $adid)
-                ->where("appname = ?", $appname);
+        try {
+            $queryDevice = $this->getAdapter()->select()
+                    ->from($this->_name)
+                    ->where("advertisingId = ?", $adid)
+                    ->where("appname = ?", $appname);
 
-        $device = $this->getAdapter()->fetchRow($queryDevice);
+            $device = $this->getAdapter()->fetchRow($queryDevice);
 
-        $cstModel = new Class_Common_Cst();
-        $model = $cstModel->getModelDevice($devicemodel);
+            $cstModel = new Class_Common_Cst();
+            $model = $cstModel->getModelDevice($devicemodel);
 
-        if (!$device) {
-            $insertDevice = array(
-                'appname' => $appname,
-                'appversion' => $appversion,
-                'deviceuid' => $deviceuid,
-                'devicetoken' => $devicetoken,
-                'devicename' => $devicename,
-                'devicemodel' => $model,
-                'deviceversion' => $deviceversion,
-                'pushbadge' => $pushbadge,
-                'pushalert' => $pushalert,
-                'mac_adress' => $macAdress,
-                'pushsound' => $pushsound,
-                'advertisingId' => $adid,
-                'vendorId' => $vendorID,
-                'development' => "production",
-                'status' => "active",
-                'created' => Date("Y-m-d H:i:s"),
-                'modified' => null);
+            if (!$device) {
+                $insertDevice = array(
+                    'appname' => $appname,
+                    'appversion' => $appversion,
+                    'deviceuid' => $deviceuid,
+                    'devicetoken' => $devicetoken,
+                    'devicename' => $devicename,
+                    'devicemodel' => $model,
+                    'deviceversion' => $deviceversion,
+                    'pushbadge' => $pushbadge,
+                    'pushalert' => $pushalert,
+                    'mac_adress' => $macAdress,
+                    'pushsound' => $pushsound,
+                    'advertisingId' => $adid,
+                    'vendorId' => $vendorID,
+                    'development' => "production",
+                    'status' => "active",
+                    'created' => Date("Y-m-d H:i:s"),
+                    'modified' => null);
 
-            $this->getAdapter()->insert($this->_name, $insertDevice);
-        } else {
-            $insertDevice = array(
-                'appname' => $appname,
-                'appversion' => $appversion,
-                'devicetoken' => $devicetoken,
-                'devicename' => $devicename,
-                'devicemodel' => $model,
-                'deviceversion' => $deviceversion,
-                'pushbadge' => $pushbadge,
-                'pushalert' => $pushalert,
-                'mac_adress' => $macAdress,
-                'pushsound' => $pushsound,
-                'advertisingId' => $adid,
-                'vendorId' => $vendorID,
-                'development' => "production",
-                'status' => "active",
-                'modified' => Date("Y-m-d H:i:s"));
+                return $this->getAdapter()->insert($this->_name, $insertDevice);
+            } else {
+                $insertDevice = array(
+                    'appname' => $appname,
+                    'appversion' => $appversion,
+                    'devicetoken' => $devicetoken,
+                    'devicename' => $devicename,
+                    'devicemodel' => $model,
+                    'deviceversion' => $deviceversion,
+                    'pushbadge' => $pushbadge,
+                    'pushalert' => $pushalert,
+                    'mac_adress' => $macAdress,
+                    'pushsound' => $pushsound,
+                    'advertisingId' => $adid,
+                    'vendorId' => $vendorID,
+                    'development' => "production",
+                    'status' => "active",
+                    'modified' => Date("Y-m-d H:i:s"));
 
-            $this->getAdapter()->update($this->_name, $insertDevice, "pid = " . $device['pid']);
+                return $this->getAdapter()->update($this->_name, $insertDevice, "pid = " . $device['pid']);
+            }
+        } catch (Exception $e) {
+            $return = array(
+              'message' =>  $e->getMessage(),  
+              'status'  =>  0  
+            );
+            return $return;
         }
 
-        return true;
     }
     
     

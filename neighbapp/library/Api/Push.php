@@ -34,14 +34,17 @@ class Api_Push extends Api_Abstract{
         $data = array();
         
         $pushModel = new Class_Db_Push_Ios_Device();
-        $pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
+        $return = $pushModel->insertDevice($task,$appname,$appversion,"",$devicetoken,$devicename,
                         $devicemodel,$deviceversion,$pushbadge,$pushalert,$pushsound,$macaddress,$adid,$vendorID);
  		
        
-       
-        $data['status'] = 1;
-        
-        return $data;
+        if(is_array($return)){
+            return $return;
+        }else{
+            $data['return'] = $return;
+            $data['status'] = 1;
+            return $data;
+        }
     }
     
     /**
