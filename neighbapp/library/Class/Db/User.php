@@ -99,4 +99,28 @@ class Class_Db_User extends Class_Db_Abstract {
         }
     }
     
+    
+    /**
+     * Get all user arround me
+     * @param type $longitude
+     * @param type $latitude
+     * @param type $rayon
+     * @return type 
+     */
+    public function GetUserArroundMe($longitude,$latitude,$rayon){
+        
+        $users = array();
+        $formule="(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`) -radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
+        $sql="SELECT u.first_name,u.picture,t.start_date,t.end_date,t.title,$formule AS dist FROM user u
+                LEFT JOIN user_transaction_link ut ON ut.user_id = u.id
+                LEFT JOIN transaction t ON t.id = ut.transaction_id 
+                WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC";
+                
+        $queryUsers = $this->getAdapter()->query($sql);
+        while ($user = $queryUsers->fetch()){
+            $users[] = $user;
+        }
+        
+        return $users;
+    }
 }
