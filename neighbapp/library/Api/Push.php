@@ -41,9 +41,7 @@ class Api_Push extends Api_Abstract{
         if(is_array($return)){
             return $return;
         }else{
-            $data['return'] = $return;
-            $data['status'] = 1;
-            return $data;
+            return array("success" => 1);
         }
     }
     

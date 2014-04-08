@@ -66,8 +66,8 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
             }
         } catch (Exception $e) {
             $return = array(
-              'message' =>  $e->getMessage(),  
-              'status'  =>  0  
+              'success' =>  0,  
+              'message' =>  32006  
             );
             return $return;
         }

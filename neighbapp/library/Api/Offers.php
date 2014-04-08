@@ -16,10 +16,15 @@ class Api_Offers extends Api_Abstract {
     public function ArroudMe($longitude,$latitude,$rayon){
         $users = $finalUser = array();
         $userModel = new Class_Db_User();
+        
+        if(!is_numeric($longitude)|| !is_numeric($latitude) || !is_numeric($rayon)){
+            return array("success" => 0, "error" => 32007);
+        }
+        
         $usersDb = $userModel->GetUserArroundMe($longitude, $latitude, $rayon);
         
         foreach($usersDb as $user){
-            $d1 = new DateTime($user['start_date']); 
+            $d1 = new DateTime(date("Y-m-d H:i:s")); 
             $d2 = new DateTime($user['end_date']); 
             $diff = $d1->diff($d2); 
             $nb_jours = $diff->d; 

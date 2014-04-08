@@ -29,7 +29,7 @@ class Api_User extends Api_Abstract {
         $emailExist = $userValidation->emailExist($email);
         
         if($emailExist){
-            return array("message"   => "Email Allready used");
+            return array("success" => 0, "error" => 32001);
         }
         
         // on save le user
@@ -53,7 +53,7 @@ class Api_User extends Api_Abstract {
             $updadeDevice = $deviceModel->updateDeviceByAdid(array('user_FK' => $createUser), $adid);
             return array("success" => 1);
         }else{
-            return array("success" => 0 , "Error" => "Error Database");
+            return array("success" => 0, "error" => 32005);
         }
         
     }
@@ -72,14 +72,14 @@ class Api_User extends Api_Abstract {
         /** Check if login exist in our database **/
         $checkUser = $userModel->checkLogin($login);
         if($checkUser == false){
-            return array("message"   => "Login does not exist");
+            return array("success" => 0, "error" => 32004);
         }
         
         
         /** Check login/password in database **/
         $user = $userModel->GetUserByLogin($login,$password);
         if($user == false){
-            return array("message"   => "Wrong password");
+            return array("success" => 0, "error" => 32003);
         }
         
         
@@ -94,8 +94,47 @@ class Api_User extends Api_Abstract {
         if($userUpdate === true){
             $user['longitude'] = $longitude;
             $user['latitude'] = $latitude;
+        }else{
+            return array("success" => 0, "error" => 32002);
         }
         
         return array("success" => 1, "data" => $user);
     }   
+    
+    /**
+     * Update User Profil
+     * @param string $first_name
+     * @param string $last_name
+     * @param string $login
+     * @param string $password
+     * @param string $email
+     * @param int $userId
+     * @return boolean 
+     */
+    public function UpdateUserInfo($first_name, $last_name, $login, $password, $email, $userId){
+        $success = false;
+        $userModel = new Class_Db_User();
+        
+        $aData = array(
+          "first_name"  =>  $first_name,
+          "last_name"  =>  $last_name,
+          "login"      =>  $login,
+          "password"   =>  $password,
+          "email"      =>  $email
+        );
+        
+        $checkEmail = $userModel->checkEmail($email);
+        
+        if($checkEmail ==- true){
+            return array("success" => 0, "error" => 32001);
+        }
+        
+        $success = $userModel->updateUser($aData,$userId);
+        
+        if($success === false){
+            return array("success" => 0, "error" => 32002);
+        }
+        
+        return array("success" => 1);
+    }
 }
