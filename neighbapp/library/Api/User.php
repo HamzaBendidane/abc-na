@@ -111,7 +111,7 @@ class Api_User extends Api_Abstract {
      * @param int $userId
      * @return boolean 
      */
-    public function UpdateUserInfo($first_name, $last_name, $login, $password, $email, $userId){
+    public function UpdateUserInfo($first_name, $last_name, $login, $password, $userId, $email = false){
         $success = false;
         $userModel = new Class_Db_User();
         
@@ -119,14 +119,17 @@ class Api_User extends Api_Abstract {
           "first_name"  =>  $first_name,
           "last_name"  =>  $last_name,
           "login"      =>  $login,
-          "password"   =>  $password,
-          "email"      =>  $email
+          "password"   =>  $password
         );
-        
-        $checkEmail = $userModel->checkEmail($email);
-        
-        if($checkEmail ==- true){
-            return array("success" => 0, "error" => 32001);
+                
+        if($email){
+            die(var_dump($email));
+            $checkEmail = $userModel->checkEmail($email);
+
+            if($checkEmail == true){
+                return array("success" => 0, "error" => 32001);
+            }
+            $aData['email'] = $email;
         }
         
         $success = $userModel->updateUser($aData,$userId);
