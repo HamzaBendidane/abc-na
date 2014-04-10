@@ -13,7 +13,7 @@ class Api_Offers extends Api_Abstract {
      * @param int $rayon
      * @return array 
      */
-    public function ArroudMe($longitude,$latitude,$rayon){
+    public function ArroundMe($longitude,$latitude,$rayon){
         $users = $finalUser = array();
         $userModel = new Class_Db_User();
         
@@ -34,6 +34,7 @@ class Api_Offers extends Api_Abstract {
             $finalUser['start_date'] = (!is_null($user['start_date']))?date('d/m/Y',strtotime($user['start_date'])):NULL;
             $finalUser['day_left'] = (!is_null($user['start_date']))?$nb_jours:NULL;
             $finalUser['title'] = (!empty($user['title']))?$user['title']:NULL;
+            $finalUser['user_id'] = $user['id'];
             
             $users[] = $finalUser;
         }
