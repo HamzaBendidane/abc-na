@@ -123,7 +123,6 @@ class Api_User extends Api_Abstract {
         );
                 
         if($email){
-            die(var_dump($email));
             $checkEmail = $userModel->checkEmail($email);
 
             if($checkEmail == true){
