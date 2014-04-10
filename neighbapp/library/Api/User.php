@@ -139,4 +139,31 @@ class Api_User extends Api_Abstract {
         
         return array("success" => 1);
     }
+    
+    /**
+     * Update User Picture
+     * @param string $url
+     * @param int $userId
+     * @return array 
+     */
+    public function UpdateUserPicture($url, $userId){
+        $success = false;
+        $userModel = new Class_Db_User();
+        
+        if(!filter_var($url, FILTER_VALIDATE_URL)){
+            return array("success" => 0, "error" => 32008);
+        }
+        
+        $aData = array(
+          "picture"  =>  $url
+        );
+        
+        $success = $userModel->updateUser($aData,$userId);
+        
+        if($success === false){
+            return array("success" => 0, "error" => 32009);
+        }
+        
+        return array("success" => 1);
+    }
 }
