@@ -115,7 +115,7 @@ class Class_Db_User extends Class_Db_Abstract {
         $sql="SELECT u.id, u.first_name,u.picture,t.start_date,t.end_date,t.title,$formule AS dist FROM user u
                 LEFT JOIN (Select * FROM user_transaction_link ORDER BY creation_date DESC)  ut ON ut.user_id = u.id
                 LEFT JOIN transaction t ON t.id = ut.transaction_id 
-                WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC,t.start_date DESC limit 1";
+                WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC,t.start_date DESC";
                 
         $queryUsers = $this->getAdapter()->query($sql);
         while ($user = $queryUsers->fetch()){
