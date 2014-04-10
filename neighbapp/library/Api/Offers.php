@@ -14,7 +14,7 @@ class Api_Offers extends Api_Abstract {
      * @return array 
      */
     public function ArroundMe($longitude,$latitude,$rayon){
-        $users = $finalUser = array();
+        $users = $return = $finalUser = array();
         $userModel = new Class_Db_User();
         
         if(!is_numeric($longitude)|| !is_numeric($latitude) || !is_numeric($rayon)){
@@ -50,7 +50,7 @@ class Api_Offers extends Api_Abstract {
      * @return array 
      */
     public function GetDemandDetail($transactionId){
-        $detail = array();
+        $detail = $return = array();
         $transactionModel = new Class_Db_Transaction();
 
         if($transactionId == 0){
@@ -63,6 +63,8 @@ class Api_Offers extends Api_Abstract {
             return array("success" => 0, "error" => 32012);
         }
         
-        return $detail;
+        $return['success'] = 1;
+        $return['transaction'] = $detail;
+        return $return;
     }
 }
