@@ -38,6 +38,31 @@ class Api_Offers extends Api_Abstract {
             
             $users[] = $finalUser;
         }
-        return $users;
+        
+        $return['success'] = 1;
+        $return['users'] = $users;
+        return $return;
+    }
+    
+    /**
+     * Get Transaction Detail
+     * @param int $transactionId
+     * @return array 
+     */
+    public function GetDemandDetail($transactionId){
+        $detail = array();
+        $transactionModel = new Class_Db_Transaction();
+
+        if($transactionId == 0){
+            return array("success" => 0, "error" => 32011);
+        }
+        
+        $detail = $transactionModel->getDetailTransaction($transactionId);
+        
+        if($detail == false){
+            return array("success" => 0, "error" => 32012);
+        }
+        
+        return $detail;
     }
 }
