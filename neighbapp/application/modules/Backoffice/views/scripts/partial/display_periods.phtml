@@ -1,0 +1,23 @@
+<div id="formPeriodContainer" class="span8">
+		<div class="btn-group large" id="formPeriod">
+		<?php $i=1; ?>
+		<?php foreach($this->periods as $period) :?>
+
+			<?php if($i==1) :?>
+				<?php $class= "left" ?>
+			<?php elseif ($i==count($this->periods)) :?>
+				<?php $class= "right" ?>
+			<?php else : ?>
+				<?php $class= "middle" ?>
+			<?php endif; ?>
+			<?php  $active = ($this->selectedOption ==$i) ? 'active' : '' ?>
+
+			<button class="glow <?php echo $class ?> <?php echo $active ?>">
+				<input type="radio" name="period" id="radio<?php  echo $i?>" value="<?php  echo $i?>"  class="hidden"><?php echo $period ?>
+			</button>               
+
+		<?php $i++ ?>
+		<?php endforeach; ?>
+
+		</div>
+</div>

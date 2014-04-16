@@ -1,0 +1,61 @@
+<div class="content">
+        
+        <!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">Default</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="/web/theme/blackbuck/css/skins/dark.css">
+                <span class="icon"></span><span class="text">Dark skin</span>
+            </a>
+        </div>
+        
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <div class="row-fluid editor-header">
+                    <div class="span12">
+                        <h4>Ace Code Editor</h4>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="editor">/**
+ * In fact, you're looking at ACE right now. Go ahead and play with it!
+ *
+ * We are currently showing off the JavaScript mode. ACE has support for 45
+ * language modes and 24 color themes!
+ */
+
+function add(x, y) {
+    var resultString = "Hello, ACE! The result of your math is: ";
+    var result = x + y;
+    return resultString + result;
+}
+
+var addResult = add(3, 2);
+console.log(addResult);
+
+// build all tooltips from data-attributes
+$("[data-toggle='tooltip']").each(function (index, el) {
+    $(el).tooltip({
+        placement: $(this).data("placement") || 'top'
+    });
+});</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+	<!-- scripts for this page -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/web/themes/blackbuck/js/bootstrap.min.js"></script>
+    <script src="/web/themes/blackbuck/js/theme.js"></script>
+    <script src="http://rawgithub.com/ajaxorg/ace-builds/master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        var editor = ace.edit("editor");
+        // editor.setTheme("ace/theme/github");
+        editor.getSession().setMode("ace/mode/javascript");
+    </script>

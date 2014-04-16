@@ -1,0 +1,32 @@
+<div class="row" id="main-stats">
+
+
+	<?php $i=0; 
+          $allKeys = array_keys($this->statistics);?>
+	<?php foreach ($this->statistics as $stat) : ?>
+	<div class="col-md-3">
+		<div
+			class="panel  <?php if($stat['state']==0): ?>panel-grey <?php else :  ?>panel-default<?php endif;?>">
+			<div class="panel-heading clearfix">
+				<i class="icon-calendar"></i>
+				<h3 class="panel-title"><?php echo $allKeys[$i]?></h3>
+			</div>
+			<?php if (isset($stat['subheading'])){?>
+				<div class="panel-sub-heading">
+					<a href="#" data-original-title="" title=""><?php echo $stat['subheading']?></a>
+				</div>
+			<?php }?>
+			<div class="panel-body">
+				<div class="daily-stats">
+					<h1 class="number primary">
+				<?php if($stat['state']==1): ?><?php echo number_format($stat['value']); ?><?php else :  ?> <?php echo 'N/A' ?> <?php endif; ?>
+			</h1>
+				</div>
+			</div>
+		</div>
+	</div>												
+		<?php $i++; ?>
+		<?php endforeach; ?>
+
+	
+</div>

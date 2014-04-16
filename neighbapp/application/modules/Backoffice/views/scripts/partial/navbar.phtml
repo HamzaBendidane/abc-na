@@ -1,0 +1,88 @@
+<!-- Header start -->
+<header class="navbar">
+
+
+    <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only"><?php echo(_('Toggle navigation')); ?> </span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">&nbsp;</a>
+    </div>
+
+
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+
+        <ul class="nav navbar-nav">
+
+            <?php
+            foreach ($this->menu as $item) :
+                ?>
+
+
+                    <?php
+                    // second menu 
+                    if (isset($item['childs']) && count($item['childs'] > 0)) :
+                        ?>
+
+                        <li class="dropdown <?php print($item['active']); ?><?php print(isset($item['attribs']['class']) ? $item['attribs']['class'] : ''); ?>">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print($item['label']); ?><b class="caret"></b></a>
+
+                            <ul class="dropdown-menu">
+                                <?php foreach ($item['childs'] as $child): ?>
+                                        <li><a href="<?php
+                                            print($this->url(array(
+                                                        "module" => $child['module'],
+                                                        "controller" => $child['controller'],
+                                                        "action" => $child['action']), null, true));
+                                            ?>">
+                                                   <?php print($child['label']); ?>
+                                            </a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    <?php else : ?>
+
+                        <li class="<?php print($item['active']); ?><?php print(isset($item['attribs']['class']) ? $item['attribs']['class'] : ''); ?>">
+
+
+                            <a href="<?php
+                            print($this->url(array(
+                                        "module" => $item['module'],
+                                        "controller" => $item['controller'],
+                                        "action" => $item['action']), null, true));
+                            ?>">
+
+                                <?php print($item['label']); ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+            <?php endforeach; ?>
+
+
+
+
+        </ul>
+
+
+        <!-- Mini navigation start -->
+        <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo($this->user->firstname); ?> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">My Account</a></li>
+                    
+                    <li class="divider"></li>
+                    <li><a href="<?php print($this->url(array('module' => 'Backoffice', 'controller' => 'user', 'action' => 'disconnect'))); ?>" role="button" title="<?php print(_('Disconnect')); ?>">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Mini navigation end -->
+
+    </nav>
+
+</header>

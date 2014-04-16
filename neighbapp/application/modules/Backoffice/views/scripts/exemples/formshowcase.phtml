@@ -1,0 +1,260 @@
+
+	<!-- main container -->
+    <div class="content">        
+      <div class="container-fluid">
+            <div id="pad-wrapper" class="form-page">
+                <div class="row-fluid form-wrapper">
+                    <!-- left column -->
+                    <div class="span8 column">
+                        <form>
+                            <div class="field-box">
+                                <label>Normal input:</label>
+                                <input class="span8" type="text" />
+                            </div>
+                            <div class="field-box">
+                                <label>Inline input:</label>
+                                <input class="span8 inline-input" placeholder=".inline-input" type="text">
+                            </div>                            
+                            <div class="field-box">
+                                <label>Inline Password:</label>
+                                <input class="span8 inline-input" type="password" value="blablabla" />
+                            </div>
+                            <div class="field-box">
+                                <label>Read only:</label>
+                                <input class="span8 inline-input" type="text" 
+                                    readonly="readonly" value="read only input">
+                            </div>
+                            <div class="field-box">
+                                <label>With tooltip:</label>
+                                <input class="span8 inline-input" data-toggle="tooltip" data-trigger="focus" title="Please insert a valid email address" data-placement="right" type="text" />
+                            </div>
+                            <div class="field-box">
+                                <label>Predefined value:</label>
+                                <div class="predefined">
+                                    <span class="value">http://</span>
+                                    <input class="span8 inline-input" type="text">
+                                </div>                                
+                            </div>
+                            <div class="field-box">
+                                <label>With max length:</label>
+                                <input class="span8 inline-input" type="text" placeholder="max 20 characters here" maxlength="20" />
+                            </div>                            
+                            <div class="field-box">
+                                <label>Textarea:</label>
+                                <textarea class="span8" rows="4"></textarea>
+                            </div>
+                            <div class="field-box">
+                                <label>Checkboxes:</label>
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Option 1
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Option 2
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Option 3
+                                </label>
+                            </div>
+                            <div class="field-box">
+                                <label>Radiobuttons:</label>
+                                <div class="span8">
+                                    <label class="radio">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                        Option one is this and that—be sure to include why it's great
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        Option two can be something else and selecting it will deselect option one
+                                    </label>
+                                </div>                                
+                            </div>
+                            <div class="field-box">
+                                <label>Wysiwyg:</label>
+                                <div class="wysi-column">
+                                    <textarea id="wysi" class="span10 wysihtml5" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- right column -->
+                    <div class="span4 column pull-right">
+                        <form>
+                            <div class="field-box">
+                                <label>Select:</label>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-box">
+                                <label>Select2 plugin styled:</label>
+                                <select style="width:250px" class="select2">
+                                    <option></option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                </select>
+                            </div>
+                            <div class="field-box">
+                                <label>Select2 multiselect:</label>
+                                <select style="width:250px" multiple class="select2">
+                                    <option></option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI" selected>Hawaii</option>
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                </select>
+                            </div>
+                            <div class="field-box">
+                                <label>Input prepend & append:</label>
+                                <div class="input-prepend">
+                                    <span class="add-on">@</span>
+                                    <input class="input-large" type="text" />
+                                </div>
+                                <div class="input-append">
+                                    <input class="input-large" type="text" />
+                                    <span class="add-on">.00</span>
+                                </div>
+                            </div>
+                            <div class="field-box">
+                                <label>Datepicker:</label>
+                                <input type="text" value="03/29/2013" class="input-large datepicker" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+	<!-- scripts for this page -->
+    <script src="/web/themes/blackbuck/js/wysihtml5-0.3.0.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/web/themes/blackbuck/js/bootstrap.min.js"></script>
+    <script src="/web/themes/blackbuck/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    <script src="/web/themes/blackbuck/js/bootstrap.datepicker.js"></script>
+    <script src="/web/themes/blackbuck/js/jquery.uniform.min.js"></script>
+    <script src="/web/themes/blackbuck/js/select2.min.js"></script>
+    <script src="/web/themes/blackbuck/js/theme.js"></script>
+
+    <!-- call this page plugins -->
+    <script type="text/javascript">
+        $(function () {
+
+            // add uniform plugin styles to html elements
+            $("input:checkbox, input:radio").uniform();
+
+            // select2 plugin for select elements
+            $(".select2").select2({
+                placeholder: "Select a State"
+            });
+
+            // datepicker plugin
+            $('.datepicker').datepicker().on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+
+            // wysihtml5 plugin on textarea
+            $(".wysihtml5").wysihtml5({
+                "font-styles": false
+            });
+        });
+    </script>

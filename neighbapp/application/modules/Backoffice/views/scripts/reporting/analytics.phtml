@@ -1,0 +1,363 @@
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+
+            <div class="panel-heading clearfix">
+                <h2 class="panel-title"><?php print(_('Analytics')) ?></h2>
+            </div>
+
+
+            <div class="panel-sub-heading">
+                <span data-original-title="" title=""><?php print(_('Choose a period, lines and columns')); ?></span>
+            </div>
+
+
+            <div class="panel-body">
+
+                <form class="form form-horizontal" role="form" method="post" id="analys" action="<?php echo($this->url(array('module' => 'Backoffice', 'controller' => 'reporting', 'action' => 'getreporting'))); ?>">
+
+
+                    <h3 class="col-sm-12"><small><i class="icon-calendar"></i>&nbsp;<?php print (_('Select the Period :')); ?></small></h3>
+                    <div class="form-group">
+
+                        <div id="daterangepickerset">
+                            <div class="col-sm-8 ranges">
+                                <ul><?php // @todo : générer auto avec le plugin   ?>
+                                    <li data-range="today" class="btn btn-default btn-xs">Today</li>
+                                    <li data-range="yesterday" class="btn btn-default btn-xs">Yesterday</li>
+                                    <li data-range="thisweek" class="btn btn-default btn-xs">This Week</li>
+                                    <li data-range="lastweek" class="btn btn-default btn-xs">Last Week</li>
+                                    <li data-range="monthtodate" class="btn btn-default btn-xs">This Month</li>
+                                    <li data-range="lastmonth" class="btn btn-default btn-xs">Last Month</li>
+                                    <li data-range="alltime" class="btn btn-default btn-xs">All Time</li>
+                                    <li data-range="custom" class="openpicker btn btn-default btn-xs">Custom Range</li>
+                                    <?php /* <li data-range="last7days" class="btn btn-default btn-xs">Last 7 Days</li> */ ?>
+                                    <?php /* <li data-range="last30days" class="btn btn-default btn-xs">Last 30 Days</li> */ ?>
+                                </ul>
+                                <input type="hidden" id="datestringrange" name="datestringrange" value="<?php echo(isset($this->currentdata['datestringrange']) ? $this->currentdata['datestringrange'] : 'custom'); ?>"/>
+                            </div>
+
+                            <div class="col-md-2 openpicker"> <?php /* @todo : tout les traitements dans le controller */ ?>
+                                <small><label for="from-date">From</label></small>
+                                <input class="form-control from-date input-sm" type="text" value="<?php if (isset($this->currentdata['startdate_value']) && $this->currentdata['startdate_value'] != "") : ?><?php echo $this->currentdata['startdate_value']; ?><?php else : ?><?php echo date('m-d-Y', strtotime('- 2 days')); ?><?php endif; ?>" id="from-date" name="from-date">
+                            </div>
+                            <div class="col-md-2" id="daterangeprimary">
+                                <small><label for="to-date">to</label></small>
+                                <input class="form-control to-date input-sm" type="text" value="<?php if (isset($this->currentdata['enddate_value']) && $this->currentdata['enddate_value'] != "") : ?><?php echo $this->currentdata['enddate_value']; ?><?php else : ?><?php echo date("m-d-Y"); ?><?php endif; ?>" id="to-date" name="to-date">
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr/>
+
+
+                    <h3  class="col-sm-12"><small><i class="icon-list-alt"></i>&nbsp;<?php print (_('Lines')) ?></small></h3>
+                    <div class="form-group">
+
+                        <div class="col-sm-5"> 
+                            <label class="control-label col-sm-1" for="report1"></label>
+                            <select class="select2 col-sm-7" id="lines1" name="lines1" >
+                                <option value="-1" >None</option>
+                                <?php foreach ($this->listCritarea as $key => $this_option): ?>
+                                    <?php
+                                    if (isset($this->currentdata['lineOne']) && $this->currentdata['lineOne'][0] === $key) :
+                                        $selected = "selected=selected";
+                                    else :
+                                        $selected = "";
+                                    endif;
+                                    ?>
+                                    <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+
+                                <?php foreach ($this->linesNotYet as $key => $this_option): ?>
+                                    <option disabled="disabled" value="<?php echo $key; ?>"><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-7">
+                            <label class="control-label col-sm-1" for="report1"><?php print (_('display')); ?></label>
+                            <select class="select2 col-sm-10" id="lines11" name="lines11" >
+                                <option value="-1" ><?php echo(_('None')); ?></option>
+                                <?php if ($this->currentdata['lineOne'][0] != "-1") { ?>
+                                    <option value="-1" selected=selected ><?php echo(_('All')); ?></option>
+                                <?php } ?>
+
+                                <?php foreach ($this->linesChoiceOne as $key => $value) { ?>
+                                    <option value="<?php echo $key; ?>"
+                                    <?php
+                                    if (isset($this->currentdata['lineOne']) && $this->currentdata['lineOne'][1] === "$key") {
+                                        echo "selected=selected";
+                                    }
+                                    ?>><?php echo $value; ?></option>
+                                        <?php } ?>
+                            </select>
+                        </div>
+                    </div><!-- End Line select 1 -->
+                  
+
+                    <div class="form-group">
+                        <div class="col-sm-5">
+                            <label class="control-label col-sm-1 col-sm-offset-1" for="report2"><?php print (_('And')); ?></label>
+                            <select class="select2 col-sm-7" id="lines2" name="lines2" >
+                                <option value="-1">None</option>
+
+                                <?php foreach ($this->listCritarea as $key => $this_option): ?>
+                                    <?php
+                                    if (isset($this->currentdata['lineTwo']) && $this->currentdata['lineTwo'][0] === $key) :
+                                        $selected = "selected=selected";
+                                    else :
+                                        $selected = "";
+                                    endif;
+                                    ?>						
+                                    <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+
+                                <?php foreach ($this->linesNotYet as $key => $this_option): ?>
+                                    <option  disabled="disabled" value="<?php echo $key; ?>"><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-7"> 
+                            <label class="control-label col-sm-1" for="report2"><?php print (_('display')); ?></label>
+                            <select class="select2 col-sm-10" id="lines22" name="lines22" >
+                                <option value="-1" ><?php echo(_('None')); ?></option>
+                                <?php if ($this->currentdata['lineTwo'][0] != "-1") { ?>
+                                    <option value="-1" selected=selected ><?php echo(_('All')); ?></option>
+                                <?php } ?>
+                                <?php foreach ($this->linesChoiceTwo as $key => $value) { ?>
+                                    <option value="<?php echo $key; ?>"
+                                    <?php
+                                    if (isset($this->currentdata['lineTwo']) && $this->currentdata['lineTwo'][1] === "$key") {
+                                        echo "selected=selected";
+                                    }
+                                    ?>
+                                            ><?php echo $value; ?></option>
+                                        <?php } ?>
+                            </select>
+                        </div>
+                    </div><!-- End Line select 2 -->
+
+
+                    <div class="form-group">
+                        <div class="col-sm-5">
+                            <label class="control-label col-sm-1 col-sm-offset-2" for="report3"><?php print (_('And')); ?></label>
+                            <select class="select2 col-sm-7" id="lines3" name="lines3">
+                                <option value="-1" >None</option>
+                                <?php foreach ($this->listCritarea as $key => $this_option): ?>
+                                    <?php
+                                    if (isset($this->currentdata['lineThree']) && $this->currentdata['lineThree'][0] === $key) :
+                                        $selected = "selected=selected";
+                                    else :
+                                        $selected = "";
+                                    endif;
+                                    ?>
+                                    <option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+
+                                <?php foreach ($this->linesNotYet as $key => $this_option): ?>
+                                    <option disabled="disabled" value="<?php echo $key; ?>"><?php echo $this_option; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-7">
+                            <label class="control-label col-sm-1" for="report3"><?php print (_('display')); ?></label>
+                            <select class="select2 col-sm-10" id="lines33" name="lines33">
+                                <option value="-1">None</option>
+                                <?php if ($this->currentdata['lineThree'][0] != "-1") { ?>
+                                    <option value="-1" selected=selected >All</option>
+                                <?php } ?>
+                                <?php foreach ($this->linesChoiceThree as $key => $value) { ?>
+                                    <option value="<?php echo $key; ?>"
+                                    <?php
+                                    if (isset($this->currentdata['lineThree']) && $this->currentdata['lineThree'][1] === "$key") {
+                                        echo "selected=selected";
+                                    }
+                                    ?>
+                                            ><?php echo $value; ?></option>
+                                        <?php } ?>
+                            </select>
+                        </div>
+                    </div><!-- End Line select 3 -->
+
+
+                    <hr/>
+                    <h3 class="col-sm-12"><small><i class="icon-signal"></i>&nbsp;<?php print (_('Columns')) ?></small></h3>
+                    <div class="form-group">
+
+                        <div><b>Field Selection</b> <i>(Select witch column you want show)</i></div>
+
+                        <div class="control-group field-box panel-sub-heading">
+                            <a href="#" class="check-all">Select All</a> | <a  href="#" class="uncheck-all">Un-Select All</a>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <?php foreach ($this->selections as $key => $option) { ?>
+                                <div>
+                                    <?php
+                                    if (isset($this->currentdata['selectField']) && count($this->currentdata['selectField'] > 0) && in_array($key, $this->currentdata['selectField'])) :
+                                        $selected = "checked=true";
+                                    else :
+                                        $selected = "";
+                                    endif;
+                                    ?>
+                                    <label class="col-sm-3"><input type="checkbox" name="selectField[]"  class="col-sm-1.<?php echo $key; ?>" value="<?php echo $key; ?>" <?php echo $selected; ?>> <?php echo $option; ?></label>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <?php foreach ($this->selectionscalcul as $key => $option) { ?>
+                                <div>
+                                    <label class="col-sm-3" ><input  disabled='disabled'  type="checkbox"  name="selectField[]"  class="col-sm-1_.<?php echo $key; ?>" value="<?php echo $key; ?>"> <?php echo $option; ?></label>
+                                </div>
+                            <?php } ?>
+
+                        </div>
+                    </div><!-- End Line select 1 -->
+
+
+
+                    <div class="form-group">
+                        <input class="btn btn-primary col-md-offset-1" id="rapport" name="rapport" type="submit" value="Generate Report">
+                        <input class="btn btn-default" disabled="disabled" id="saverapport" name="saverapport" value="Save Report" type="button">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="icon-list-alt"></i>
+                <h2 class="panel-title"><?php print(_('Reporting')) ?></h2>
+            </div>
+
+            <div class="panel-body">
+<?php print ($this->table); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var initanalitics = function() {
+
+        $(document).on('change', "#lines1", function() {
+            var id = $(this).val();
+            disabledColumn();
+
+            $('#lines11').empty();
+            // $('#lines11').select2('data', {id: -1, text: 'All'});
+            $('#lines11').append('<option value="-1">All</option>');
+            $.ajax({
+                type: "POST",
+                url: "<?php echo($this->url(array('module' => 'Backoffice', 'controller' => 'reporting', 'action' => 'getligneinfo'))); ?>",
+                data: {id: id},
+                dataType: 'json',
+                success: function(json) {
+                    $.each(json, function(index, value) {
+                        $('#lines11').append('<option value="' + index + '">' + value + '</option>');
+                    });
+                },
+                error: function(e) {
+
+                }
+            });
+
+        });
+        $(document).on('change', "#lines2", function() {
+            var id = $(this).val();
+            disabledColumn();
+            $('#lines22').empty();
+            //  $('#lines22').select2('data', {id: -1, text: 'All'});
+            $('#lines22').append('<option value="-1">All</option>');
+            $.ajax({
+                type: "POST",
+                url: "<?php echo($this->url(array('module' => 'Backoffice', 'controller' => 'reporting', 'action' => 'getligneinfo'))); ?>",
+                data: {id: id},
+                dataType: 'json',
+                success: function(json) {
+                    $.each(json, function(index, value) {
+                        $('#lines22').append('<option value="' + index + '">' + value + '</option>');
+                    });
+                },
+                error: function(e) {
+
+                }
+            });
+
+        });
+        $(document).on('change', "#lines3", function() {
+            var id = $(this).val();
+            disabledColumn();
+            $('#lines33').empty();
+            //$('#lines33').select2('data', {id: -1, text: 'All'});
+            $('#lines33').append('<option value="-1">All</option>');
+            $.ajax({
+                type: "POST",
+                url: "<?php echo($this->url(array('module' => 'Backoffice', 'controller' => 'reporting', 'action' => 'getligneinfo'))); ?>",
+                data: {id: id},
+                dataType: 'json',
+                success: function(json) {
+                    $.each(json, function(index, value) {
+                        $('#lines33').append('<option value="' + index + '">' + value + '</option>');
+                    });
+                },
+                error: function(e) {
+
+                }
+            });
+
+        });
+
+        function disabledColumn() {
+            var tab = [$("#lines1").val(), $("#lines2").val(), $("#lines3").val()];
+
+            if (tab.indexOf("reporting_select_campaign") != -1 || tab.indexOf("reporting_select_adFormat") != -1 || tab.indexOf("reporting_select_adUnit") != -1) {
+
+                $("input[value='reporting_field_request']").attr('checked', false);
+                $("input[value='reporting_field_fillRate']").attr('checked', false);
+                $("input[value='reporting_field_request']").attr('disabled', 'disabled');
+                $("input[value='reporting_field_fillRate']").attr('disabled', 'disabled');
+            } else {
+                $("input[value='reporting_field_request']").attr('checked', false);
+                $("input[value='reporting_field_fillRate']").attr('checked', false);
+                $("input[value='reporting_field_request']").attr('disabled', false);
+                $("input[value='reporting_field_fillRate']").attr('disabled', false);
+            }
+
+            if (tab.indexOf("reporting_select_campaign") != -1) {
+                $("input[value='reporting_field_status']").prop('checked', false);
+                $("input[value='reporting_field_status']").prop('disabled', false);
+                $("input[value='reporting_field_status']").parents("div").removeClass('disabled');
+            } else {
+                $("input[value='reporting_field_status']").prop('checked', false);
+                $("input[value='reporting_field_status']").parent().removeClass('checked');
+                $("input[value='reporting_field_status']").attr('disabled', 'disabled');
+            }
+            return tab;
+        }
+         
+        $(document).ready(function(){
+            disabledColumn();
+        });
+    };
+
+    requirejs(['main', 'select2', 'moment', 'app-forms', 'daterangepickerset'], function() {
+        initanalitics();
+        daterangepickerset();
+        tools.loadCss('/web/js/lib/select2/select2.css');
+        $(".select2").select2();
+        
+    });
+</script>

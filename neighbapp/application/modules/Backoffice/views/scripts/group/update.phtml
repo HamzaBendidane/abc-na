@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h2 class="panel-title"><?php print(_('Update Group')) ?></h2>
+            </div>
+            <div class="panel-body">
+                <?php echo $this->form_group; ?>
+
+                <a class="btn btn-link" href="<?php print($this->url(array('module' => 'Backoffice', 'controller' => 'group', 'action' => 'index'), null, true)); ?>">
+                    <i class="icon-chevron-left"></i>
+                    <?php print(_('annuler')); ?></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var initgroupright = function() {
+
+        $(document).ready(function() {
+
+            var userModul = $("#group_rights-graph").is(':checked');
+            if (userModul == false) {
+                $("input[id^='rights-graph']").attr('disabled', 'disabled');
+            }
+
+            var userModul = $("#group_rights-user").is(':checked');
+            if (userModul == false) {
+                $("input[id^='rights-user']").attr('disabled', 'disabled');
+            }
+
+            var userModul = $("#group_rights-reporting").is(':checked');
+            if (userModul == false) {
+                $("input[id^='rights-reporting']").attr('disabled', 'disabled');
+                $("input[id^='select-reporting']").attr('disabled', 'disabled');
+                $("input[id^='field-reporting']").attr('disabled', 'disabled');
+                $("input[id^='rights-reporting']").attr('checked', false);
+                $("input[id^='select-reporting']").attr('checked', false);
+                $("input[id^='field-reporting']").attr('checked', false);
+            }
+
+            var userModul = $("#group_rights-group_right").is(':checked');
+            if (userModul == false) {
+                $("input[id^='rights-group']").attr('disabled', 'disabled');
+                $("input[id^='rights-group']").attr('checked', false);
+            }
+
+            var userModul = $("#group_rights-company").is(':checked');
+            if (userModul == false) {
+                $("input[id^='rights-company']").attr('disabled', 'disabled');
+                $("input[id^='rights-company']").attr('checked', false);
+            }
+
+            $("#group_rights-user").on("click", function() {
+                var userModul = $(this).is(':checked');
+                if (userModul) {
+                    $("input[id^='rights-user']").prop('disabled', false);
+                } else {
+                    $("input[id^='rights-user']").attr('disabled', 'disabled');
+                    $("input[id^='rights-user']").attr('checked', false);
+                }
+            });
+
+            $("#group_rights-reporting").on("click", function() {
+                var userModul = $(this).is(':checked');
+                if (userModul) {
+                    $("input[id^='rights-reporting']").prop('disabled', false);
+                    $("input[id^='select-reporting']").prop('disabled', false);
+                    $("input[id^='field-reporting']").prop('disabled', false);
+                } else {
+                    $("input[id^='rights-reporting']").prop('disabled', true);
+                    $("input[id^='select-reporting']").prop('disabled', true);
+                    $("input[id^='field-reporting']").prop('disabled', true);
+                    $("input[id^='rights-reporting']").attr('checked', false);
+                    $("input[id^='select-reporting']").attr('checked', false);
+                    $("input[id^='field-reporting']").attr('checked', false);
+                }
+            });
+
+            $("#group_rights-group_right").on("click", function() {
+                var userModul = $(this).is(':checked');
+                if (userModul) {
+                    $("input[id^='rights-group']").prop('disabled', false);
+                } else {
+                    $("input[id^='rights-group']").attr('disabled', 'disabled');
+                    $("input[id^='rights-group']").attr('checked', false);
+                }
+            });
+
+            $("#group_rights-graph").on("click", function() {
+                var userModul = $(this).is(':checked');
+                if (userModul) {
+                    $("input[id^='group_graph']").prop('disabled', false);
+                } else {
+                    $("input[id^='group_graph']").attr('disabled', 'disabled');
+                    $("input[id^='group_graph']").attr('checked', false);
+                }
+            });
+
+            $("#group_rights-company").on("click", function() {
+                var userModul = $(this).is(':checked');
+                if (userModul) {
+                    $("input[id^='rights-company']").prop('disabled', false);
+                } else {
+                    $("input[id^='rights-company']").attr('disabled', 'disabled');
+                    $("input[id^='rights-company']").attr('checked', false);
+                }
+            });
+        });
+    }
+    requirejs(['main'], function() {
+        initgroupright();
+    });
+</script>

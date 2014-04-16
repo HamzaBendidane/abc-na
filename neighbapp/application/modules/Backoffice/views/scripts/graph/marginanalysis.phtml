@@ -1,0 +1,135 @@
+<?php
+$filters = $this->filters ['userFields'];
+//par defaut today est select
+$selectedField = (isset($this->currentdata['period'])) ? ($this->currentdata['period']) : 1;
+
+$currentTab = 4; // means it is a ctr
+$aAllInfo ['currentTab'] = 4;
+$aAllInfo ['userFields'] = $this->userFields;
+$aAllInfo ['selectedField'] = $this->selectedField;
+?>
+
+<form class="form row-border form-horizontal" role="form" method="post" id="graph">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h2 class="panel-title"><?php echo(_('Margin Analysis')) ?></h2>
+                </div>
+
+                <div class="panel-sub-heading">
+                    <span data-original-title="" title=""><?php print(_('Choose a period')); ?></span>
+                </div>
+
+                <div class="panel-body">
+
+                    <h3 class="col-sm-12"><small><i class="icon-calendar"></i>&nbsp;<?php print (_('Select the period :')); ?></small></h3>
+                    <div class="form-group">
+                        <div id="daterangepickerset">
+                            <div class="col-sm-8 ranges">
+                                <ul><?php // @todo : générer auto avec le plugin         ?>
+                                    <li data-range="today" class="btn btn-default btn-xs">Today</li>
+                                    <li data-range="yesterday" class="btn btn-default btn-xs">Yesterday</li>
+                                    <li data-range="thisweek" class="btn btn-default btn-xs">This Week</li>
+                                    <li data-range="lastweek" class="btn btn-default btn-xs">Last Week</li>
+                                    <li data-range="monthtodate" class="btn btn-default btn-xs">This Month</li>
+                                    <li data-range="lastmonth" class="btn btn-default btn-xs">Last Month</li>
+                                    <li data-range="alltime" class="btn btn-default btn-xs">All Time</li>
+                                    <li data-range="custom" class="openpicker btn btn-default btn-xs">Custom Range</li>
+                                    <?php /* <li data-range="last7days" class="btn btn-default btn-xs">Last 7 Days</li> */ ?>
+                                    <?php /* <li data-range="last30days" class="btn btn-default btn-xs">Last 30 Days</li> */ ?>
+                                </ul>
+                                <input type="hidden" id="datestringrange" name="datestringrange" value="<?php echo(isset($this->currentdata['datestringrange']) ? $this->currentdata['datestringrange'] : 'custom'); ?>"/>
+                            </div>
+
+                            <div class="col-md-2 openpicker"> <?php /* @todo : tout les traitements dans le controller */ ?>
+                                <small><label for="from-date">From</label></small>
+                                <input class="form-control from-date input-sm" type="text" value="<?php if (isset($this->currentdata['startdate_value']) && $this->currentdata['startdate_value'] != "") : ?><?php echo $this->currentdata['startdate_value']; ?><?php else : ?><?php echo date('m-d-Y', strtotime('- 2 days')); ?><?php endif; ?>" id="from-date" name="from-date">
+                            </div>
+                            <div class="col-md-2" id="daterangeprimary">
+                                <small><label for="to-date">to</label></small>
+                                <input class="form-control to-date input-sm" type="text" value="<?php if (isset($this->currentdata['enddate_value']) && $this->currentdata['enddate_value'] != "") : ?><?php echo $this->currentdata['enddate_value']; ?><?php else : ?><?php echo date("m-d-Y"); ?><?php endif; ?>" id="to-date" name="to-date">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group"> 
+                        <input type="submit" class="btn btn-primary" value="Generate" id="generateGraph">
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<?php if (!isset($this->currentdata['errorData'])) : ?>
+
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <?php echo($this->topByPublisher); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <?php print ($this->topByFormat); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <?php echo($this->topByCampaign); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php else : ?>
+    
+    <div class="row">
+        <div class="alert">
+            <i class="icon-warning-sign"></i>
+            <?php echo $this->currentdata['errorData']; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+    
+    
+    
+    var initgraph = function() {
+
+        $(document).ready(function() {
+
+            $('#generateGraph').on('click', function(e) {
+
+                if (campaignid <= -1) {
+                    e.preventDefault();
+                }
+
+            });
+        });
+    }
+
+    requirejs(['main', 'select2', 'moment', 'highcharts', 'daterangepicker', 'daterangepickerset'], function() {
+        initgraph();
+        daterangepickerset();
+
+        tools.loadCss('/web/js/lib/select2/select2.css');
+        $(".select2").select2();
+    });
+</script>
