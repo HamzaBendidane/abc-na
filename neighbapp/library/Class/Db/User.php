@@ -124,4 +124,20 @@ class Class_Db_User extends Class_Db_Abstract {
         
         return $users;
     }
+    
+    
+    /**
+     * Get User Detail By Id
+     * @param int $userId
+     * @return array $user 
+     */
+    public function GetUserById($userId){
+        
+        $queryUser = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->where('id = ?',$userId);
+        $user =  $this->getAdapter()->fetchRow($queryUser);
+        
+        return ($user)?$user:false;
+    }
 }

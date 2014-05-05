@@ -166,4 +166,21 @@ class Api_User extends Api_Abstract {
         
         return array("success" => 1);
     }
+    
+    
+    /**
+     * Get User Picture
+     * @param int $userId
+     * @return string 
+     */
+    public function GetUserPicture($userId){
+        $userModel = new Class_Db_User();
+        $userPictur = $userModel->GetUserById($userId);
+        
+        if($userPictur === false){
+            return array("success" => 0, "error" => 32009);
+        }
+        
+        return array("success" => 1,"url" => $userPictur['picture']);
+    }
 }
