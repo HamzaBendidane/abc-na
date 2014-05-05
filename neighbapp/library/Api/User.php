@@ -178,7 +178,7 @@ class Api_User extends Api_Abstract {
         $userPictur = $userModel->GetUserById($userId);
         
         if($userPictur === false){
-            return array("success" => 0, "error" => 32009);
+            return array("success" => 0, "error" => 32015);
         }
         
         return array("success" => 1,"url" => $userPictur['picture']);
