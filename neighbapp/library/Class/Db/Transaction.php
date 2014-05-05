@@ -25,4 +25,23 @@ class Class_Db_Transaction extends Class_Db_Abstract {
         return ($detail)?$detail:false;
     }
     
+    
+    /**
+     * Get All user transactions
+     * @param int $userId
+     * @return array $transactions
+     */
+    public function GetAllUserTransaction($userId){
+        $transactions = $users = array();
+        
+        $queryUsers = $this->getAdapter()->select()
+                ->from("user_transaction_link")
+                ->joinLeft("$this->_name", "$this->_name.id = user_transaction_link.transaction_id")
+                ->where('user_transaction_link.user_id = ?',$userId)
+                ->order("user_transaction_link.creation_date DESC");
+        
+        $transactions = $this->getAdapter()->fetchAll($queryUsers);
+        return ($transactions)?$transactions: array();
+    }
+    
 }

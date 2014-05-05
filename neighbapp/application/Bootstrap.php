@@ -25,45 +25,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('neighbapp', $adapter1);
 
         Zend_Db_Table::setDefaultAdapter($adapter1);
-
-        /* CONNEXION TO MULTIPLE DB EXEMPLE
-          if (APP == 'AX-IOS'){
-          $adapter1 = $resource->getDb('pushuk');
-          Zend_Registry::set('push', $adapter1);
-
-          $adapter2 = $resource->getDb('iosdbuk');
-          Zend_Registry::set('iosdb', $adapter2);
-
-          Zend_Db_Table::setDefaultAdapter($adapter2);
-          }
-          else if (APP == 'AP-IOS'){
-          $adapter1 = $resource->getDb('pushfr');
-          Zend_Registry::set('push', $adapter1);
-
-          $adapter2 = $resource->getDb('iosdbfr');
-          Zend_Registry::set('iosdb', $adapter2);
-
-          $adapter3 = $resource->getDb('androiddbfr');
-          Zend_Registry::set('androiddb', $adapter3);
-
-          Zend_Db_Table::setDefaultAdapter($adapter2);
-          }
-          else{
-          die("NO APP DEFINED");
-          }
-         * 
-         */
     }
 
     /**
      * Clear route for each module with env "MODULE"
      */
     protected function _initRoutes() {
-
+        
         $frontcontroller = $this->getResource('frontController');
 
         $route = $frontcontroller->getRouter();
-
         if (getenv('MODULE')) {
             $pattern = ':controller/:action/*';
             $module = getenv('MODULE');

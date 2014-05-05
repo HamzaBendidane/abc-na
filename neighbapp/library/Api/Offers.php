@@ -23,19 +23,24 @@ class Api_Offers extends Api_Abstract {
         
         $usersDb = $userModel->GetUserArroundMe($longitude, $latitude, $rayon);
         
-        foreach($usersDb as $user){
+        foreach($usersDb as $user){ 
+            $transactions = array();
             $d1 = new DateTime(date("Y-m-d H:i:s")); 
-            $d2 = new DateTime($user['end_date']); 
-            $diff = $d1->diff($d2); 
-            $nb_jours = $diff->d; 
-            $finalUser['distance'] = round($user['dist'],2) * 100;
+            $finalUser['distance'] = round($user['dist'], 2) * 100;
             $finalUser['picture'] = $user['picture'];
             $finalUser['first_name'] = ucfirst($user['first_name']);
-            $finalUser['start_date'] = (!is_null($user['start_date']))?date('d/m/Y',strtotime($user['start_date'])):NULL;
-            $finalUser['day_left'] = (!is_null($user['start_date']))?$nb_jours:NULL;
-            $finalUser['title'] = (!empty($user['title']))?$user['title']:NULL;
             $finalUser['user_id'] = $user['id'];
-            
+            foreach ($user['requests'] as $transaction) {
+                $d2 = new DateTime($transaction['end_date']); 
+                $diff = $d1->diff($d2); 
+                $nb_jours = $diff->d;  
+                $transactionUser['duration'] = (!is_null($transaction['start_date'])) ? $nb_jours * 60 * 60 * 24 : NULL;
+                $transactionUser['start_date'] = (!is_null($transaction['start_date'])) ? strtotime($transaction['start_date']) : NULL;
+                $transactionUser['title'] = (!empty($transaction['title'])) ? $transaction['title'] : NULL;
+                $transactionUser['short_desc'] = $transaction['short_desc'];
+                $transactions[] = $transactionUser;
+            }
+            $finalUser['requests'] = $transactions;
             $users[] = $finalUser;
         }
         
@@ -60,7 +65,7 @@ class Api_Offers extends Api_Abstract {
         $detail = $transactionModel->getDetailTransaction($transactionId);
         
         if($detail == false){
-            return array("success" => 0, "error" => 32012);
+            return array("success" => 0, "error" => 32014);
         }
         
         $return['success'] = 1;

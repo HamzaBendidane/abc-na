@@ -18,7 +18,6 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
      * Login Page
      */
     public function indexAction() {
-
         if ($this->_user_is_connected) {
             $this->_helper->redirector('index', 'home', 'Backoffice');
         }

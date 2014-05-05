@@ -108,17 +108,17 @@ class Class_Db_User extends Class_Db_Abstract {
      * @return type 
      */
     public function GetUserArroundMe($longitude,$latitude,$rayon){
-        
+        $transactionModel = new Class_Db_Transaction();
         // TODO : ORDER BY start_date DESC
         $users = array();
         $formule="(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`) -radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
-        $sql="SELECT u.id, u.first_name,u.picture,t.start_date,t.end_date,t.title,$formule AS dist FROM user u
-                LEFT JOIN (Select * FROM user_transaction_link ORDER BY creation_date DESC)  ut ON ut.user_id = u.id
-                LEFT JOIN transaction t ON t.id = ut.transaction_id 
-                WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC,t.start_date DESC";
-                
+        $sql="SELECT u.id, u.first_name,u.picture,$formule AS dist FROM user u
+                WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC";
         $queryUsers = $this->getAdapter()->query($sql);
+        
         while ($user = $queryUsers->fetch()){
+            $allTransactions = $transactionModel->GetAllUserTransaction($user['id']);
+            $user['requests'] = $allTransactions;
             $users[] = $user;
         }
         
