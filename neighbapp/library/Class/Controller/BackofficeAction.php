@@ -62,32 +62,16 @@ abstract class Class_Controller_BackofficeAction extends Zend_Controller_Action
          if($this->_global_access != 'public'){
                                     
             if($this->_user_is_connected){
-                $const = Cfe_Numbate_Rights::$groupLabel;
+                //$const = Cfe_Numbate_Rights::$groupLabel;
                 $this->_user_info = Zend_Auth::getInstance()->getStorage()->read();
 
-                $this->_acl = $this->_user_info->acl;
+                //$this->_acl = $this->_user_info->acl;
                 // Info User and device
                 
                 // Get controller and action for ACL
                 $params = $this->_request->getParams();
                 $controller = $params['controller'];
                 $action = $params['action'];
-                
-                // Get All resource from ACL
-                $allRessources =  $this->_acl->getResources();
-                
-                // Check if controller is in ACL
-                if((in_array($controller,$allRessources))){
-                    // Check if user have rights for this action
-                    if(!$this->_acl->isAllowed($this->_user_info->type,$controller,$action)){
-                    	
-                        $this->_helper->redirector->gotoSimpleAndExit('index', 'login', 'Backoffice');
-                    }
-                    
-                }else{
-                    $this->_helper->redirector->gotoSimpleAndExit('index', 'login', 'Backoffice');
-                }
-                
              
             }
             else{

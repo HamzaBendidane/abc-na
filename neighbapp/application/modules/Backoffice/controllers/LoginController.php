@@ -38,23 +38,21 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
                 $authAdapter = new Zend_Auth_Adapter_DbTable(
                         $dbAdapter, 'uaccounts', 'email', 'password'
                 );
-
                 $authAdapter->setIdentity($request->getPost('login'));
-                $authAdapter->setCredential(hash("md5", $request->getPost('password')));
+                $authAdapter->setCredential($request->getPost('password'));
 
                 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
-
                 if ($result->isValid()) {
-                    $userGroupModel = new Class_Model_UserGroup();
+                    //$userGroupModel = new Class_Model_UserGroup();
                     // écriture de l’objet complet en session, sauf le champ password
-                    $const = Cfe_Numbate_Rights::$groupLabel;
+                    //$const = Cfe_Numbate_Rights::$groupLabel;
                     $data = $authAdapter->getResultRowObject(null, 'password');
 
                     // Récupération du groupe de l'utilisateur
-                    $data->groupe = $userGroupModel->getUserGroupById($data->type);
+                    //$data->groupe = $userGroupModel->getUserGroupById($data->type);
 
                     // Récupération des ACL pour le groupe de l'utilisateur
-                    $data->acl = new Class_Common_Acl($data->type);
+                    //$data->acl = new Class_Common_Acl($data->type);
                     Zend_Auth::getInstance()->getStorage()->write($data);
 
                     $this->_helper->redirector('index', 'home', 'Backoffice');

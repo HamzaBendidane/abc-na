@@ -7,24 +7,11 @@ class Zend_View_Helper_Navbar extends Zend_View_Helper_Abstract {
      *
      * Nb : indexes of parent are use for display submenu
      */
-    public function Navbar($options = array()) {
+    public function Navbar() {
 
-    	$moduleNavigationData = new Modules_Backoffice_Navigation_Data();
-    	
-    	$menu = $moduleNavigationData->getNavigationData();
-    	if ($menu == FALSE) {
-    		return '';
-    	}
-    	
-	
-        if (isset($options ['parent'])) {
-            $menu = $menu [$options ['parent']] ['childs'];
-        }
+            $user = Zend_Auth::getInstance()->getStorage()->read();
 
-        return $this->view->partial('partial/navbar.phtml', array(
-                    'menu' => $menu,
-                    'user' => Zend_Auth::getInstance()->getStorage()->read()
-                ));
+            return $this->view->partial('partial/navbar.phtml', array('user' => $user));
     }
 
 }

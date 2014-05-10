@@ -33,7 +33,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initRoutes() {
         
         $frontcontroller = $this->getResource('frontController');
-
         $route = $frontcontroller->getRouter();
         if (getenv('MODULE')) {
             $pattern = ':controller/:action/*';

@@ -30,6 +30,8 @@ class Api_Offers extends Api_Abstract {
             $finalUser['picture'] = $user['picture'];
             $finalUser['first_name'] = ucfirst($user['first_name']);
             $finalUser['user_id'] = $user['id'];
+            $finalUser['longitude'] = $user['longitude'];
+            $finalUser['latitude'] = $user['latitude'];
             foreach ($user['requests'] as $transaction) {
                 $d2 = new DateTime($transaction['end_date']); 
                 $diff = $d1->diff($d2); 

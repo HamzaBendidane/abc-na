@@ -112,7 +112,7 @@ class Class_Db_User extends Class_Db_Abstract {
         // TODO : ORDER BY start_date DESC
         $users = array();
         $formule="(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`) -radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
-        $sql="SELECT u.id, u.first_name,u.picture,$formule AS dist FROM user u
+        $sql="SELECT u.id, u.first_name,u.picture,u.latitude,u.longitude,$formule AS dist FROM user u
                 WHERE $formule<='$rayon' GROUP BY u.id ORDER by dist ASC";
         $queryUsers = $this->getAdapter()->query($sql);
         
