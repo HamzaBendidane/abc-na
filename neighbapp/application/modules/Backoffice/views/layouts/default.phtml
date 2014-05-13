@@ -3,32 +3,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <?php $this->headTitle()->setSeparator(' - '); 
-        $this->headTitle()->prepend(_('BlackBuck')); 
+        $this->headTitle()->prepend(_('NeighbApp')); 
         echo $this->headTitle();
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="icon" type="image/png" href="<?php echo($this->config->themeurl); ?>/favicon.png" />
-
-        <!-- All CSS compiled -->
-        <link href="<?php echo($this->config->themeurl); ?>/css/main.css" rel="stylesheet" media="screen">
-
-        <!-- Font Awesome CSS -->
-        <link href="<?php echo($this->config->themeurl); ?>/fonts/font-awesome.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet" media="screen">
+        <link href="/assets/css/neighbapp.css" rel="stylesheet" media="screen">
 
         <?php print $this->headLink(); ?>
-
-        <!--[if IE 7]>
-          <link rel="stylesheet" href="<?php echo($this->config->themeurl); ?>/fonts/font-awesome.css">
-        <![endif]-->
-
-        <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="/web/js/lib/html5shiv.js"></script>
-          <script src="/web/js/lib/respond.min.js"></script>
-        <![endif]-->
-
-        <!-- scripts -->
         <script src="/web/js/lib/require.js"></script>
         <script src="/web/js/app.js"></script>
     </head>
@@ -36,7 +20,7 @@
     <body>
 
 <div class="container">
-<?php print $this->Topbar(); ?>
+<?php //print $this->Topbar(); ?>
 <?php if(!$this->hiddehead): ?>
 <?php print $this->Navbar(); ?>
 <?php print $this->Pagetitle(); ?>
