@@ -32,6 +32,7 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
 
         $request = $this->_request;
         if ($request->isPost()) {
+            die(var_dump($form->isValid($request->getPost())));
             if ($form->isValid($request->getPost())) {
 
                 $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
