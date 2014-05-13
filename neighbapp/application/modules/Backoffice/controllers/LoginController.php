@@ -32,7 +32,6 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
 
         $request = $this->_request;
         if ($request->isPost()) {
-            die(var_dump($form->isValid($request->getPost())));
             if ($form->isValid($request->getPost())) {
 
                 $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
@@ -43,6 +42,7 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
                 $authAdapter->setCredential($request->getPost('password'));
 
                 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
+                die(var_dump($result->isValid()));
                 if ($result->isValid()) {
                     //$userGroupModel = new Class_Model_UserGroup();
                     // écriture de l’objet complet en session, sauf le champ password
