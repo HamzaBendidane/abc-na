@@ -53,10 +53,9 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
 
                     // Récupération des ACL pour le groupe de l'utilisateur
                     //$data->acl = new Class_Common_Acl($data->type);
-                                        die('ok');
 
-                    Zend_Auth::getInstance()->getStorage()->write($data);
-                    die('ok');
+                    $storage = new Zend_Auth_Storage_Session();
+                    $storage->write();
                     $this->_helper->redirector('index', 'home', 'Backoffice');
                 } else {
                     $form->getElement('login')->addErrors($result->getMessages());
