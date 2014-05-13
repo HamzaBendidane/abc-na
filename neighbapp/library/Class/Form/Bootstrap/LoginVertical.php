@@ -19,7 +19,7 @@ class Class_Form_Bootstrap_LoginVertical extends Twitter_Bootstrap_Form_Vertical
         $this->getElement('password')->removeDecorator('label');
         
         $this->getElement('submit')->setOptions(array(
-            'class'         => 'btn btn-primary btn-lg'
+            'class'         => 'btn btn-primary'
         ));
     }
 }

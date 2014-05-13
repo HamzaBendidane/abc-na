@@ -28,7 +28,7 @@ class Backoffice_LoginController extends Class_Controller_BackofficeAction {
 
         $form = new Class_Form_Bootstrap_LoginVertical;
 
-        $this->view->form = $form;
+        $this->view->form = $form->addDecorator ( 'Fieldset', array ('legend' => 'Authentification' ) );
 
         $request = $this->_request;
         if ($request->isPost()) {
