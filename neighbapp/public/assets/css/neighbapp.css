@@ -14,3 +14,9 @@ body{
 .btn-right{
     float: right;
 }
+
+.icon-pencil{
+    width: 20px;
+    height: 10px;
+    background-image:url(/assets/images/modifie.png);
+}

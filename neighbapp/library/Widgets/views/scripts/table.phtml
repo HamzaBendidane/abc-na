@@ -1,32 +1,35 @@
-    <table id="datatable-<?php echo($this->id_instance); ?>" class="table table-hover sorted">
-        <thead>
-        <tr> 
-            <?php foreach ($this->fields as $field) : ?>
-            <th><?php print($this->label($field)); ?></th>
-            <?php endforeach; ?>
-         </tr>
-        </thead> 
-        
-        <tbody>
-            <?php foreach ($this->alldata as $row) : ?>
-            <tr>
-                <?php foreach ($row as $key => $td) : ?>
-                    <?php if(in_array($key, $this->fields)): ?>
-                    <td><?php print($td); ?></td>
-                    <?php endif; ?>
-                 <?php endforeach; ?>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+<div class="table-responsive table-sorted">
+    <div role="grid" class="dataTables_wrapper" id="datatable1_wrapper">
+        <table id="datatable-<?php echo($this->id_instance); ?>" class="table table-hover sorted">
+            <thead>
+                <tr> 
+                    <?php foreach ($this->fields as $field) : ?>
+                        <th><?php print($this->label($field)); ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead> 
 
+            <tbody>
+                <?php foreach ($this->alldata as $row) : ?>
+                    <tr>
+                        <?php foreach ($row as $key => $td) : ?>
+                            <?php if (in_array($key, $this->fields)): ?>
+                                <td><?php print($td); ?></td>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
     
-    $('#datatable-<?php echo($this->id_instance); ?>').dataTable({
-         "sDom": "<'row'<'span8'l><'span12'f>r>t<'row'<'span8'i><'span12'p>>",
-        "sPaginationType": "bootstrap"
+        $('#datatable-<?php echo($this->id_instance); ?>').dataTable({
+            "sDom": "<'row'<'span8'l><'span12'f>r>t<'row'<'span8'i><'span12'p>>",
+            "sPaginationType": "bootstrap"
+        });
+    
     });
-    
-});
 </script>
