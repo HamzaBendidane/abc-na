@@ -1,0 +1,32 @@
+    <table id="datatable-<?php echo($this->id_instance); ?>" class="table table-hover sorted">
+        <thead>
+        <tr> 
+            <?php foreach ($this->fields as $field) : ?>
+            <th><?php print($this->label($field)); ?></th>
+            <?php endforeach; ?>
+         </tr>
+        </thead> 
+        
+        <tbody>
+            <?php foreach ($this->alldata as $row) : ?>
+            <tr>
+                <?php foreach ($row as $key => $td) : ?>
+                    <?php if(in_array($key, $this->fields)): ?>
+                    <td><?php print($td); ?></td>
+                    <?php endif; ?>
+                 <?php endforeach; ?>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+<script>
+$(document).ready(function(){
+    
+    $('#datatable-<?php echo($this->id_instance); ?>').dataTable({
+         "sDom": "<'row'<'span8'l><'span12'f>r>t<'row'<'span8'i><'span12'p>>",
+        "sPaginationType": "bootstrap"
+    });
+    
+});
+</script>

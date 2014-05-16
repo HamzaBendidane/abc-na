@@ -183,4 +183,10 @@ class Api_User extends Api_Abstract {
         
         return array("success" => 1,"url" => $userPictur['picture']);
     }
+    
+    
+    public function GetAllUsers(){
+        $userModel = new Class_Db_Uaccounts();
+        return $userModel->GetAllUsers();
+    }
 }

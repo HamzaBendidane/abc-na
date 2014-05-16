@@ -10,3 +10,7 @@ body{
 #submit{
     margin-top: 1em;
 }
+
+.btn-right{
+    float: right;
+}

@@ -10,6 +10,7 @@ class Zend_View_Helper_Label extends Zend_View_Helper_Abstract {
     public function Label($index, $context = false) {
        
        if($context !== false){
+           die(var_dump($context));
            $labelContextClass = 'Class_Common_Label_' . ucfirst($context);
            $label = $labelContextClass::getLabel($index);
        } else {

@@ -1,0 +1,102 @@
+<div id="container-<?php echo($this->id_instance); ?>"
+	style="width: 100%; height: 400px;"></div>
+
+<?php
+$infoChart = $this->data [0];
+$aData = $this->data [1];
+
+$arrayAxis = array_keys ( $aData );
+$seriesData = array_values ( $aData );
+
+$series = "";
+$allSeries = NULL;
+foreach ( $seriesData as $value ) {
+	
+	if (! (is_array ( $value ))) {
+		
+		$series = $series . $value . ",";
+		
+	} else {
+		
+		if (! isset ( $keys )) {
+			$keys = array_keys ( $value );
+			foreach ($keys as $vk)
+				$allSeries[$vk] = array();
+		}
+		
+		foreach ($value as $k=>$v)
+			
+			array_push($allSeries[$k], $v);
+			
+		
+	}
+}
+
+
+if (isset ( $allSeries )) {
+	
+	foreach ( $allSeries as $key => $value ) {
+		
+		$series = $series . "{name: '" . $key . "',data: [";
+		foreach ( $value as $v ) {
+			$series = $series . $v . ",";
+		}
+		$series = $series . "]},";
+	}
+	
+}else {
+	
+$series = "{name:\"".$infoChart['titleyAxis']."\", data :[".$series."]}";
+            
+}
+
+
+
+?>
+
+
+<script>
+$(function () { 
+    $('#container-<?php echo($this->id_instance); ?>').highcharts({
+    	
+    	chart: {
+            type: 'column',
+            margin: [ 50, 50, 100, 80]
+        },
+        title: {
+            text: <?php echo "\"".$infoChart['text']."\"";?>
+        },
+        xAxis: {
+            categories: [
+                <?php foreach ($arrayAxis as $value)
+                	print "\"".$value."\",";
+                	?>         
+            ],
+            labels: {
+                rotation: -45,
+                align: 'right',
+                style: {
+                    fontSize: '10px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+
+        yAxis: {
+            min: 0,
+            title: {
+                text: <?php echo "\"".$infoChart['titleyAxis']."\"";?>
+            }
+        },
+
+        legend: {
+            enabled: <?php echo $infoChart['legend'];?>
+        },
+       
+        series: [
+				<?php print  $series;?>
+                 ]
+    });
+});
+</script>
+

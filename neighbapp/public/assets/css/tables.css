@@ -1,0 +1,362 @@
+/* general table styles */
+.table-wrapper {
+	width: 100%;
+	margin-bottom: 100px
+}
+.table-wrapper .filter-block{
+	margin-bottom: 34px;
+}
+.table-wrapper .filter-block .ui-select{
+	margin-right: 20px;
+	top: 1px;
+	height: 24px;
+	width: 150px;
+}
+.table-wrapper .filter-block .search {
+	margin: 0 60px 0 0;
+}
+.table-wrapper .filter-block .new-product{
+	padding: 4px 14px;
+}
+.table-wrapper .table th input[type="checkbox"]{
+	margin-top: 4px;
+}
+.table-wrapper .table input[type="checkbox"]{
+	float: left;
+	margin-top: 11px;
+	margin-right: 23px;
+}
+.table-wrapper .table .img{
+	height: 31px;
+	float: left;
+	background: white;
+	width: 31px;
+	border: 1px solid #dfe4eb;
+	text-align: center;
+	cursor: pointer;
+	margin-right: 23px;
+}
+.table-wrapper .table .img img{
+	margin-top: 4px;
+}
+.table-wrapper .table tr.first td{
+	border-top: 0 none;
+}
+.table-wrapper .table td a{
+	text-decoration: underline;
+	display: inline-block;
+	max-width: 500px;
+}
+.table-wrapper .table td.description{
+	vertical-align: middle;
+	color: #516372;
+}
+.table-wrapper .label {
+	position: relative;
+}
+.table-wrapper .table ul.actions {
+	margin: 5px 0 0 0;
+	padding: 0;
+	float: right;
+}
+.table-wrapper .table ul.actions li{
+	display: inline;
+	/*border-right: 1px solid #d0dde9;*/
+	padding: 5px 6px 0px 3px;
+}
+.table-wrapper .table ul.actions li.last{
+	border: 0 none;
+}
+.table-wrapper .table ul.actions i{
+	cursor: pointer;
+	opacity: 0.6;
+
+	transition: opacity .1s linear;
+	-moz-transition: opacity .1s linear;
+	-webkit-transition: opacity .1s linear;
+	-o-transition: opacity .1s linear;
+}
+.table-wrapper .table ul i:hover{
+	opacity: 1;
+}
+
+/* products table specific styles */
+.table-wrapper.products-table a.name {
+	position: relative;
+	top: 6px;
+}
+
+
+/* orders table specific styles */
+.table-wrapper.orders-table td {
+	padding: 12px 8px;
+}
+
+
+/* users table specific styles */
+.table-wrapper.users-table .table td {
+	vertical-align: middle;
+	font-size: 13px;
+}
+.table-wrapper.users-table .table img.avatar {
+	float: left;
+	margin-right: 14px;
+	max-width: 45px;
+	position: relative;
+	top: 8px;
+}
+.table-wrapper.users-table .table a.name{
+	color: #3389d1;
+	display: block;
+	font-weight: 600;
+	font-size: 14px;
+	margin: 15px 0 0 0;
+}
+.table-wrapper.users-table .table .subtext {
+	font-size: 12px;
+	margin-left: 0;
+	color: #778391;
+	font-style: italic;
+	margin-top: 0;
+}
+
+/*Responsive*/
+@media (max-width: 979px) {
+	.pointer {
+		top: 26.8%;
+	}
+}
+
+@media (max-width: 767px) {
+	.table-wrapper .table .img {
+		display: none;
+	}
+	.table-wrapper .table input[type="checkbox"] {
+		margin-right: 10px;
+	}
+	.table-wrapper .table .label {
+		display: none;
+	}
+	.table-wrapper .filter-block .search{
+		width: 30%;
+		margin: 0 10px 0 0;
+	}
+	.table-wrapper .filter-block .order-search{
+		float: left;
+		margin: 0;
+		width: 40%;
+	}
+	.table-wrapper .filter-block .user-search{
+		float: left;
+		margin: 0;
+		width: 55%;
+	}
+	.table-wrapper .filter-block .add-user{
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.table-wrapper .filter-block .search{
+		float: right;
+		width: 48%;
+		margin: 0;
+	}
+	.table-wrapper .filter-block .new-product{
+		float: right;
+		margin-top: 15px;
+	}
+	.table-wrapper .filter-block .order-search{
+		float: left;
+		width: 43%;
+	}
+		.table-wrapper .filter-block .add-user{
+		margin-top: 0;
+	}
+	.table-wrapper .filter-block .user-search{
+		float: left;
+		margin: 0;
+		width: 55%;
+	}
+	
+}
+
+
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter label {
+	float: right;
+}
+
+div.dataTables_info {
+	padding-top: 8px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .sorting { background: url('img/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('img/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('img/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: url('img/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('img/sort_desc_disabled.png') no-repeat center right; }
+
+table.dataTable th:active {
+	outline: none;
+}
+
+/* Scrolling */
+div.dataTables_scrollHead table {
+	margin-bottom: 0 !important;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+div.dataTables_scrollHead table thead tr:last-child th:first-child,
+div.dataTables_scrollHead table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody tbody tr:first-child th,
+div.dataTables_scrollBody tbody tr:first-child td {
+	border-top: none;
+}
+
+div.dataTables_scrollFoot table {
+	border-top: none;
+}
+
+
+
+
+/*
+ * TableTools styles
+ */
+.table tbody tr.active td,
+.table tbody tr.active th {
+	background-color: #08C;
+	color: white;
+}
+
+.table tbody tr.active:hover td,
+.table tbody tr.active:hover th {
+	background-color: #0075b0 !important;
+}
+
+.table-striped tbody tr.active:nth-child(odd) td,
+.table-striped tbody tr.active:nth-child(odd) th {
+	background-color: #017ebc;
+}
+
+table.DTTT_selectable tbody tr {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+div.DTTT .btn {
+	color: #333 !important;
+	font-size: 12px;
+}
+
+div.DTTT .btn:hover {
+	text-decoration: none !important;
+}
+
+
+ul.DTTT_dropdown.dropdown-menu a {
+	color: #333 !important; /* needed only when demo_page.css is included */
+}
+
+ul.DTTT_dropdown.dropdown-menu li:hover a {
+	background-color: #0088cc;
+	color: white !important;
+}
+
+/* TableTools information display */
+div.DTTT_print_info.modal {
+	height: 150px;
+	margin-top: -75px;
+	text-align: center;
+}
+
+div.DTTT_print_info h6 {
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 28px;
+	margin: 1em;
+}
+
+div.DTTT_print_info p {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+
+
+/*
+ * FixedColumns styles
+ */
+div.DTFC_LeftHeadWrapper table,
+div.DTFC_LeftFootWrapper table,
+table.DTFC_Cloned tr.even {
+	background-color: white;
+}
+
+div.DTFC_LeftHeadWrapper table {
+	margin-bottom: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftHeadWrapper table thead tr:last-child th:first-child,
+div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.DTFC_LeftBodyWrapper tbody tr:first-child th,
+div.DTFC_LeftBodyWrapper tbody tr:first-child td {
+	border-top: none;
+}
+
+div.DTFC_LeftFootWrapper table {
+	border-top: none;
+}
+

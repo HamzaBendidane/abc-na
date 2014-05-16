@@ -38,7 +38,7 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
             'gender',
             'firstname'
         );
-        
+
         $this->view->table = $this->view->widget('Table', $this->_userApi->GetAllUsers(), array('crud' => true, 'fields' => $fields));
     }
         

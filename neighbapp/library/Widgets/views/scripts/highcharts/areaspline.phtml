@@ -1,0 +1,88 @@
+<div id="container-<?php echo($this->id_instance); ?>"
+	style="width: 100%; height: 400px;"></div>
+
+<?php
+$infoChart = $this->data [0];
+$aData = $this->data [1];
+
+$arrayAxis = array_keys ( $aData );
+
+$categories = "";
+$series ="";
+ if (isset ( $arrayAxis ) && count($arrayAxis) > 0) {
+	
+	$allSeries = array ();
+	foreach ( $arrayAxis as $value ) {
+		$categories = $categories . "'" . $value . "',";
+	}
+	
+	foreach ( $aData [$arrayAxis [0]] as $key => $value ) {
+		$allSeries [$key] = array ();
+	}
+	
+
+	foreach ( $aData as $dataPerDate ) {
+		
+		foreach ( $dataPerDate as $key => $value ) {
+			
+			array_push ( $allSeries [$key], $value );
+		}
+	
+	}
+	foreach ( $allSeries as $key => $value ) {
+		$series = $series."{name: '" . $key . "',data: [";
+		foreach ( $value as $v ) {
+			$series =$series.$v.",";
+		}
+		$series= $series. "]},";
+	}
+	
+
+}else {
+	
+	$categories ="''";
+	$series= "{
+                name: '',
+                data: [10]
+            }";
+	
+}
+
+?>
+
+
+<script>
+$(function () { 
+    $('#container-<?php echo($this->id_instance); ?>').highcharts({
+    	
+        chart: {
+            type :"areaspline"
+        },
+       
+        title: {
+            
+            text:  <?php echo "'".$infoChart['text']."'";?>
+        },
+        
+        xAxis: { 
+            categories: 
+        				[
+                         <?php
+                         	print $categories;
+                         ?>
+                         ]
+        },
+        
+        yAxis: {
+            title: {
+                text: <?php echo "'".$infoChart['titleyAxis']."'";?>
+            }
+        },
+    
+        series: [
+			<?php print $series;?>
+          ]  
+    });
+});
+</script>
+

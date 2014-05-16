@@ -1,0 +1,103 @@
+<!-- jQuery flot chart -->
+<div class="row-fluid section">
+    <h4 class="title">
+        jQuery Flot <small>Monthly growth</small>
+        <div class="btn-group pull-right">
+            <button class="glow left">DAY</button>
+            <button class="glow middle active">MONTH</button>
+            <button class="glow right">YEAR</button>
+        </div>
+    </h4>
+    <div class="span12">
+        <div id="statsChart-<?php echo($this->id_instance); ?>"></div>
+    </div>
+</div>
+
+<script>
+
+        var request = [<?php foreach($this->data_for_graph_flot['request'] as $key => $line) : ?>[<?php echo($key); ?>, <?php echo($line); ?>],<?php endforeach; ?>];
+        var impression = [<?php foreach($this->data_for_graph_flot['impression'] as $key => $line) : ?>[<?php echo($key); ?>, <?php echo($line); ?>],<?php endforeach; ?>];
+        var click = [<?php foreach($this->data_for_graph_flot['clicks'] as $key => $line) : ?>[<?php echo($key); ?>, <?php echo($line); ?>],<?php endforeach; ?>];
+
+        var plot = $.plot($("#statsChart-<?php echo($this->id_instance); ?>"),
+            [ { data: request, label: "Request"},
+             { data: impression, label: "Impression" },
+            { data: click, label: "Click" }], {
+                series: {
+                    lines: { show: true,
+                            lineWidth: 1,
+                            fill: true, 
+                            fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                         },
+                    points: { show: false, 
+                             lineWidth: 2,
+                             radius: 3
+                         },
+                    shadowSize: 0,
+                    stack: true
+                },
+                grid: { hoverable: true, 
+                       clickable: true, 
+                       tickColor: "#f9f9f9",
+                       borderWidth: 0
+                    },
+                legend: {
+                        // show: false
+                        labelBoxBorderColor: "#fff"
+                    },  
+                colors: ["#a7b5c5", "#30a0eb"],
+                xaxis: {
+                    ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
+                           [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
+                    font: {
+                        size: 12,
+                        family: "Open Sans, Arial",
+                        variant: "small-caps",
+                        color: "#9da3a9"
+                    }
+                },
+                yaxis: {
+                    ticks:3, 
+                    tickDecimals: 0,
+                    font: {size:12, color: "#9da3a9"}
+                }
+             });
+
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css( {
+                position: 'absolute',
+                display: 'none',
+                top: y - 30,
+                left: x - 50,
+                color: "#fff",
+                padding: '2px 5px',
+                'border-radius': '6px',
+                'background-color': '#000',
+                opacity: 0.80
+            }).appendTo("body").fadeIn(200);
+        }
+
+        var previousPoint = null;
+        $("#statsChart").bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(0),
+                        y = item.datapoint[1].toFixed(0);
+
+                    var month = item.series.xaxis.ticks[item.dataIndex].label;
+
+                    showTooltip(item.pageX, item.pageY,
+                                item.series.label + " of " + month + ": " + y);
+                }
+            }
+            else {
+                $("#tooltip").remove();
+                previousPoint = null;
+            }
+        });
+          
+          
+</script>

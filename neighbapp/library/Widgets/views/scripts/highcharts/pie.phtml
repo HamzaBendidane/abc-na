@@ -1,0 +1,55 @@
+<div id="container-<?php echo($this->id_instance); ?>"
+	style="width: 100%; height: 400px;"></div>
+
+<?php
+$infoChart = $this->data [0];
+$aData = $this->data [1];
+
+$dataSeries="";
+foreach ($aData as $key => $value){
+	$dataSeries = $dataSeries ."[\"".$key."\",".$value."],";
+}
+
+?>
+
+
+<script>
+$(function () { 
+    $('#container-<?php echo($this->id_instance); ?>').highcharts({
+    	
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text:  <?php echo "'".$infoChart['text']."'";?>
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [
+{
+            type: 'pie',
+            name: 'pourcentage',
+            data: [
+                <?php print $dataSeries; ?>
+            ]
+        }
+          ]  
+    });
+});
+</script>
+
