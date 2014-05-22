@@ -15,8 +15,21 @@ body{
     float: right;
 }
 
-.icon-pencil{
-    width: 20px;
-    height: 10px;
-    background-image:url(/assets/images/modifie.png);
+.update-link{
+    display:block;
+    width:16px;
+    height:16px;
+    float: left;
+    margin-right: 10px;
+    background-image:url('/assets/images/pencil.png');
+}
+
+
+.delete-link{
+    display:block;
+    width:16px;
+    height:16px;
+    float: left;
+    margin-right: 10px;
+    background-image:url('/assets/images/remove.png');
 }
