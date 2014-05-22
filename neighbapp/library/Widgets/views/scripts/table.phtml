@@ -1,6 +1,5 @@
 <div class="table-responsive table-sorted">
-    <div role="grid" class="dataTables_wrapper" id="datatable1_wrapper">
-        <table id="datatable-<?php echo($this->id_instance); ?>" class="table table-hover sorted">
+    <table id="datatable<?php echo($this->id_instance); ?>" class="table table-striped no-margin sorted">
             <thead>
                 <tr> 
                     <?php foreach ($this->fields as $field) : ?>
@@ -21,15 +20,26 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
 </div>
 <script>
-    $(document).ready(function(){
-    
-        $('#datatable-<?php echo($this->id_instance); ?>').dataTable({
-            "sDom": "<'row'<'span8'l><'span12'f>r>t<'row'<'span8'i><'span12'p>>",
-            "sPaginationType": "bootstrap"
+    var inijquerytable = function(options) {
+        $(document).ready(function() {
+            $('#datatable' + options.id).dataTable({
+                "sDom": options.dom,
+                "sPaginationType": "full_numbers",
+                "oTableTools": {
+                   
+                    "sSwfPath": "/assets/swf/copy_csv_xls_pdf.swf"
+                }
+            });
         });
-    
+    };
+    requirejs(['main', 'datatables', 'datatables-tabletools', 'app-forms'], function() {
+
+        tools.loadCss('/assets/js/lib/datatables/datatables.extra.css');
+        inijquerytable({
+            'id': <?php echo($this->id_instance); ?>,
+            'dom': <?php if (isset($this->options['tabletools'])): ?>"T<'clear'>lfrtip"<?php else : ?>"<'clear'>lfrtip"<?php endif; ?>
+        });
     });
 </script>

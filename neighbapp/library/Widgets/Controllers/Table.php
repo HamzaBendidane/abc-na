@@ -32,7 +32,7 @@ class Widgets_Controllers_Table extends Widgets_Controllers_Abstract {
      * @return string
      */
     protected $css = array(
-        '/assets/css/tables.css'
+        '/assets/css/jquery.dataTables.css'
     );
     protected $js = array(
         '/assets/js/jquery.dataTables.min.js',
@@ -106,7 +106,7 @@ class Widgets_Controllers_Table extends Widgets_Controllers_Abstract {
 
         }
         
-        $return .= $this->view->partial('table.phtml', array('fields' => $fields, 'alldata' => $this->data, 'id_instance' => self::$id_instance));
+        $return .= $this->view->partial('table.phtml', array('fields' => $fields, 'alldata' => $this->data, 'id_instance' => self::$id_instance, 'options' => $this->_options));
         
         //ici : logique pour vérifier que champs sont ok (correspondance) , etc....
         return $return;
