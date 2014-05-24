@@ -1,22 +1,28 @@
-    <a  data-toggle="modal" data-target="#myModal" class='delete-link' href='<?php
-print($this->url(array(
+<a  data-href='<?php 
+        print($this->url(array(
             "module" => 'Backoffice',
             "controller" => $this->active_controller,
             "action" => 'delete',
-            "id" => $this->id)));
-?>'>&nbsp;<i class="icon-trash"></i></a>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            "id" => $this->id))); ?>' data-toggle="modal" data-target="#confirm-delete" class='delete-link' href='<?php 
+        print($this->url(array(
+            "module" => 'Backoffice',
+            "controller" => $this->active_controller,
+            "action" => 'delete',
+            "id" => $this->id))); ?>'>&nbsp;<i class="icon-trash"></i></a>
+            
+            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                ...
             </div>
             <div class="modal-body">
-                Exemple de modal
+                ...
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
