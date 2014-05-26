@@ -8,7 +8,7 @@
 class Class_Db_Push_Ios_MessageTest extends Class_Db_Abstract {
 
     protected $_name = 'ios_message_test';
-    protected $_adapter = 'push';
+    protected $_adapter = 'neighbapp';
     
     public function addMessage($message,$versionId,$deviceId,$pipId,$token,$start_time){
         $createMessage = array(

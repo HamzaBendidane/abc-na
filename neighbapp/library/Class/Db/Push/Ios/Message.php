@@ -8,7 +8,7 @@
 class Class_Db_Push_Ios_Message extends Class_Db_Abstract {
 
     protected $_name = 'ios_message';
-    protected $_adapter = 'push';
+    protected $_adapter = 'neighbapp';
     
     public function addMessage($message,$versionId,$deviceId,$pipId,$token,$start_time = null,$push_test = 0,$userId = null,$campaignId = null){
         if(!$start_time){
@@ -81,5 +81,22 @@ class Class_Db_Push_Ios_Message extends Class_Db_Abstract {
         $today = date('Y-m-d H:i:s');
         $yesturday = date("Y-m-d H:i:s",strtotime('-1 day',  strtotime($today)));
         return $this->getAdapter()->delete($this->_name, "start_date <= '$yesturday' and status = 'delivered'");
+    }
+    
+    
+    public function getAllMessageTest(){
+        
+        $return = array();
+        $queryPip = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->join("ios_version", "$this->_name.version_id = ios_version.id")
+                ->join("ios_devices_test", "$this->_name.device_id = ios_devices_test.id",array("name as device_name"))
+                ->where("push_test = ?" , 1);
+        $pips = $this->getAdapter()->query($queryPip);
+        
+        while($pip = $pips->fetch()){
+            $return[] = $pip;
+        }
+        return $return;
     }
 }

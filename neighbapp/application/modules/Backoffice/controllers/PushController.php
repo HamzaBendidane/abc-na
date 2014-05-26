@@ -1,0 +1,187 @@
+<?php
+
+/**
+ * Module Backoffice Numbate
+ * Users controller 
+ * @author romain.causse@surikate.com  
+ */
+
+
+class Backoffice_PushController extends Class_Controller_BackofficeAction
+{
+    /**
+     * API user
+     */
+    protected $_pushApi;
+
+
+    public function preDispatch() {
+        parent::preDispatch();
+        
+        $this->_pushApi = new Api_Push();
+        $this->view->sidebar = array('display' => 'horizontal');
+    }
+    
+    
+    /**
+     * Show all user
+     */
+    public function indexAction()
+    {   
+        $this->view->headTitle(_("Push list"));
+        
+        // champs a afficher
+        $fields = array(
+            "name",
+            'message',
+            'start_time',
+            'state',
+            'total_send'
+        );
+
+        $this->view->table = $this->view->widget('Table', $this->_pushApi->GetAllPush(), array('crud' => true, 'fields' => $fields));
+    }
+    
+    
+    /**
+     * Show all user
+     */
+    public function pushtestAction()
+    {   
+        $this->view->headTitle(_("Push test list"));
+        
+        // champs a afficher
+        $fields = array(
+            "name",
+            'device_name',
+            'start_time',
+            'message'
+        );
+
+        $this->view->table = $this->view->widget('Table', $this->_pushApi->GetAllPushTest(), array('crud' => true, 'fields' => $fields));
+    }
+    
+    
+    /**
+     * Show all user
+     */
+    public function versionAction()
+    {   
+        $this->view->headTitle(_("Push version list"));
+        
+        // champs a afficher
+        $fields = array(
+            "name",
+            'certificate_prod',
+            'certificate_dev',
+            'rate'
+        );
+
+        $this->view->table = $this->view->widget('Table', $this->_pushApi->GetAllPushVersion(), array('crud' => true, 'fields' => $fields));
+    }
+    
+    
+    /**
+     * Show all user
+     */
+    public function deviceAction()
+    {   
+        $this->view->headTitle(_("Push device list"));
+        
+        // champs a afficher
+        $fields = array(
+            "name",
+            'token'
+        );
+
+        $this->view->table = $this->view->widget('Table', $this->_pushApi->GetAllPushDevice(), array('crud' => true, 'fields' => $fields));
+    }
+        
+    /**
+     * add a user
+     */
+    public function addAction()
+    {   
+        $this->view->headTitle(_("Add Push"));
+        
+        $form = new Class_Form_Bootstrap_User();
+        $this->view->form = $form;
+
+        $request = $this->getRequest();
+        if($request->isPost()){
+            if( $form->isValid($request->getPost())){
+                    
+                 $data = $request->getPost('data');
+                 
+                 $this->_userApi->createUser($data);
+                 
+                 $this->_helper->redirector('index', 'user', 'Backoffice');
+            }
+            
+        }
+    }
+    
+    /**
+     * update a user
+     */
+    public function updateAction()
+    {   
+        $user_data = $this->_userApi->getUsrById($this->_request->getParam('id'));
+                
+        $this->view->headTitle(_("User : ") . $user_data['firstname'] . ' ' . $user_data['lastname']);
+        
+        $form = new Class_Form_Bootstrap_User();
+        $data = array('data' => $user_data);
+        $form->populate($data);
+        
+        $form->getElement('password')->setOptions(array('required' => false));
+        
+        $this->view->form = $form;
+
+        $request = $this->getRequest();
+        if($request->isPost()){
+            if( $form->isValid($request->getPost())){
+                    
+                 $data = $request->getPost('data');
+       
+                 $this->_userApi->updateUser($data, $user_data['id']);
+                 
+                 $this->_helper->redirector('index', 'user', 'Backoffice');
+            }
+            
+        }
+        
+        
+    }
+    
+    /**
+     * delete a user
+     */
+    public function deleteAction()
+    {   
+       $form = new Class_Form_Bootstrap_Delete();
+       $form->setId($this->_request->getParam('id'));
+       $this->view->form = $form;
+       
+        if($this->_request->isPost()){
+            if( $form->isValid($this->_request->getPost()) ){
+                    
+                 if($this->_request->getParam('valide')){
+                     $this->_userApi->deleteUser($this->_request->getParam('id'));
+                     $this->_helper->redirector('index', 'user', 'Backoffice');
+                 }else{
+                     $this->_helper->redirector('index', 'user', 'Backoffice');
+                 }
+            }
+        }
+    }
+    
+    /**
+     * Disconnect and clear session
+     */
+    public function disconnectAction(){
+        Zend_Auth::getInstance()->clearIdentity();
+        //redirects
+        $this->_helper->redirector('index', 'login', 'Backoffice');
+    }
+}

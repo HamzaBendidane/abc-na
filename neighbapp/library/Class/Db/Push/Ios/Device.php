@@ -96,4 +96,17 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
         }
     }
 
+    
+    public function getAllPushDevice(){
+        
+        $return = array();
+        $queryPip = $this->getAdapter()->select()
+                ->from("ios_devices_test");
+        $pips = $this->getAdapter()->query($queryPip);
+        
+        while($pip = $pips->fetch()){
+            $return[] = $pip;
+        }
+        return $return;
+    }
 }

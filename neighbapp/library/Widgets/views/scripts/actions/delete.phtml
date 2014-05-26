@@ -1,12 +1,13 @@
-<a  data-href='<?php 
-        print($this->url(array(
+<a  data-href='<?php
+print($this->url(array(
             "module" => 'Backoffice',
             "controller" => $this->active_controller,
             "action" => 'delete',
-            "id" => $this->id))); ?>' data-toggle="modal" data-target="#confirm-delete" class='delete-link' href='<?php 
-        print($this->url(array(
-            "module" => 'Backoffice',
-            "controller" => $this->active_controller,
-            "action" => 'delete',
-            "id" => $this->id))); ?>'>&nbsp;<i class="icon-trash"></i></a>
-            
+            "id" => $this->id)));
+?>' data-toggle="modal" data-target="#confirm-delete" class='delete-link' href='<?php
+    print($this->url(array(
+                "module" => 'Backoffice',
+                "controller" => $this->active_controller,
+                "action" => 'delete',
+                "id" => $this->id)));
+?>'>&nbsp;<i class="icon-trash"></i></a>

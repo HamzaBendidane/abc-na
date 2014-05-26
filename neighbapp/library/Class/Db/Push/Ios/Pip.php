@@ -8,7 +8,7 @@
 class Class_Db_Push_Ios_Pip extends Class_Db_Abstract {
 
     protected $_name = 'ios_push_pip';
-    protected $_adapter = 'push';
+    protected $_adapter = 'neighbapp';
     
     public function getWaitingPip(){
         $date = date('Y-m-d H:i:s');
@@ -58,5 +58,41 @@ class Class_Db_Push_Ios_Pip extends Class_Db_Abstract {
         $pip = $this->getAdapter()->fetchRow($queryPip);
         
         return $pip;
+    }
+    
+    public function getAllPush(){
+        $return = array();
+        $queryPip = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->join("ios_version", "$this->_name.version_id = ios_version.id");
+        $pips = $this->getAdapter()->query($queryPip);
+        
+        while($pip = $pips->fetch()){
+            switch ($pip['state']) {
+                case 0:
+                    $pip['state'] = "Not validate";
+                    break;
+                case 1:
+                    $pip['state'] = "Validated";
+                    break;
+                case 0:
+                    $pip['state'] = "In creation";
+                    break;
+                case 0:
+                    $pip['state'] = "Sending";
+                    break;
+                case 0:
+                    $pip['state'] = "Sended";
+                    break;
+                case 0:
+                    $pip['state'] = "Rollbacked";
+                    break;
+
+                default:
+                    break;
+            }
+            $return[] = $pip;
+        }
+        return $return;
     }
 }

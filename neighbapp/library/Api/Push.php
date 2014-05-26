@@ -107,4 +107,36 @@ class Api_Push extends Api_Abstract{
         $messageModel->addMessage($message, $versionId, $deviceId,$registration_id,null,null,1,$type,$color,$url_image);
         return true;
     }
+    
+    public function GetAllPush(){
+        
+        $pipModel = new Class_Db_Push_Ios_Pip();
+        $allPush = $pipModel->getAllPush();
+        
+        return $allPush;
+    }
+    
+    public function GetAllPushVersion(){
+        
+        $pipModel = new Class_Db_Push_Ios_Version();
+        $allPush = $pipModel->getAllPush();
+        
+        return $allPush;
+    }
+    
+    public function GetAllPushTest(){
+        
+        $pipModel = new Class_Db_Push_Ios_Message();
+        $allPush = $pipModel->getAllMessageTest();
+        
+        return $allPush;
+    }
+    
+    public function GetAllPushDevice(){
+        
+        $pipModel = new Class_Db_Push_Ios_Device();
+        $allPush = $pipModel->getAllPushDevice();
+        
+        return $allPush;
+    }
 }

@@ -14,9 +14,9 @@
         <link href="/assets/css/neighbapp.css" rel="stylesheet" media="screen">
         <link href="/assets/css/simplePagination.css" rel="stylesheet" media="screen">
 
-<?php print $this->headLink(); ?>
-    <script src="/assets/js/lib/require.js"></script>
-    <script src="/assets/js/app.js"></script>
+        <?php print $this->headLink(); ?>
+        <script src="/assets/js/lib/require.js"></script>
+        <script src="/assets/js/app.js"></script>
     </head>
 
     <body>
@@ -24,28 +24,18 @@
         <?php if (!$this->hiddehead): ?>
             <?php print $this->Navbar(); ?>
             <?php print $this->Pagetitle(); ?>
-            <?php endif; ?>
-        <div class="container">
-            
-            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                ...
+        <?php endif; ?>
+        <div class="container"><div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <a href="#" class="btn btn-danger danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a href="#" class="btn btn-danger danger">Delete</a>
-            </div>
+            <?php print $this->layout()->content; ?>
         </div>
-    </div>
-</div>
-            <?php //print $this->Topbar(); ?>
-            <?php echo ( $this->displayFlashMessage() ); ?>
-        <?php print $this->layout()->content; ?>
-        </div>
-</body>
+    </body>
 </html>

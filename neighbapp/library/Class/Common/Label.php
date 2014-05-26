@@ -14,9 +14,19 @@ class Class_Common_Label {
             'lastname' => 'Lastname',
             'gender' => 'Gender',
             'actions' => 'Actions',
-            'company_zip' => 'compagny zip code'
+            'company_zip' => 'compagny zip code',
+            'name'=> "Application Version",
+            'message'=>    "Message",
+            'start_time' => "Send Time",
+            'state'=>  "State",
+            'certificate_prod'=>  "Production certificate",
+            'certificate_dev'=>  "Development certificate",
+            'rate'=>  "Rate",
+            'token'=>  "Device token",
+            'device_name'=>  "Device Name",
+            'total_send' => "Total send"
         );
-
+        
         return $list_label[$index];
     }
 
