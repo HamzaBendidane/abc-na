@@ -36,6 +36,8 @@ body{
 
 #valided {
     
+    display:block;
+    background-position: center;
 	border-radius: 50%;
 	width: 20px;
 	height: 20px; 
@@ -44,7 +46,9 @@ body{
 }
 
 #rejected {
-    
+        background-position: center;
+
+    display:block;
 	border-radius: 50%;
 	width: 20px;
 	height: 20px; 
