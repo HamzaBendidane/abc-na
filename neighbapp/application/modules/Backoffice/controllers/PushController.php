@@ -79,14 +79,14 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
         $versions = $this->_pushApi->GetAllPushVersion();
         foreach ($versions as $key => $version){
             if(file_exists($version["certificate_prod"])){
-                $versions[$key]["certificate_prod"] = '<div id="valided"></div>';
+                $versions[$key]["certificate_prod"] = '<span id="valided"></span>';
             }else{
-                $versions[$key]["certificate_prod"] = '<div id="rejected"></div>';
+                $versions[$key]["certificate_prod"] = '<span id="rejected"></span>';
             }
             if(file_exists($version["certificate_dev"])){
-                $versions[$key]["certificate_dev"] = '<div id="valided"></div>';
+                $versions[$key]["certificate_dev"] = '<span id="valided"></span>';
             }else{
-                $versions[$key]["certificate_dev"] = '<div id="rejected"></div>';
+                $versions[$key]["certificate_dev"] = '<span id="rejected"></span>';
             }
         }
      
