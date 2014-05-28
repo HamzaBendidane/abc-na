@@ -182,6 +182,9 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
             $ext = pathinfo($path, PATHINFO_EXTENSION);
             if($ext == "pem"){
                 $target_path_prod = $this->_config->certificat_prod."$version_data[id]/";
+                if(!is_dir($target_path_prod)){
+                    mkdir($target_path_prod,0777);
+                }
                 $target_path_prod = $target_path_prod . basename( $_FILES['certificate_prod']['name']); 
                 move_uploaded_file($_FILES['certificate_prod']['tmp_name'], $target_path_prod);
             }else{
@@ -194,6 +197,9 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
             $ext = pathinfo($path, PATHINFO_EXTENSION);
             if($ext == "pem"){
                 $target_path_dev = $this->_config->certificat_dev."$version_data[id]/";
+                if(!is_dir($target_path_prod)){
+                    mkdir($target_path_prod,0777);
+                }
                 $target_path_dev = $target_path_dev . basename( $_FILES['certificate_dev']['name']); 
                 move_uploaded_file($_FILES['certificate_dev']['tmp_name'], $target_path_dev);
             }else{
