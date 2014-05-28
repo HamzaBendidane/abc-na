@@ -119,7 +119,7 @@ class Api_Push extends Api_Abstract{
     public function GetAllPushVersion(){
         
         $pipModel = new Class_Db_Push_Ios_Version();
-        $allPush = $pipModel->getAllPush();
+        $allPush = $pipModel->getAllVersion();
         
         return $allPush;
     }
@@ -138,5 +138,37 @@ class Api_Push extends Api_Abstract{
         $allPush = $pipModel->getAllPushDevice();
         
         return $allPush;
+    }
+    
+    public function GetDeviceTestById($deviceId){
+        
+        $deviceModel = new Class_Db_Push_Ios_DeviceTest();
+        $device = $deviceModel->getDeviceTestById($deviceId);
+        
+        return $device;
+    }
+    
+    public function UpdateDeviceTest($aData,$deviceId){
+        
+        $deviceModel = new Class_Db_Push_Ios_DeviceTest();
+        $device = $deviceModel->updateDeviceTest($aData,$deviceId);
+        
+        return $device;
+    }
+    
+    public function GetVersionById($versionId){
+        
+        $versionModel = new Class_Db_Push_Ios_Version();
+        $version = $versionModel->getVersionById($versionId);
+        
+        return $version;
+    }
+    
+    public function UpdateVersion($aData,$versionId){
+        
+        $versionModel = new Class_Db_Push_Ios_Version();
+        $version = $versionModel->updateVersion($aData,$versionId);
+        
+        return $version;
     }
 }

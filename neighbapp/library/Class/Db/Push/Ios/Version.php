@@ -19,7 +19,7 @@ class Class_Db_Push_Ios_Version extends Class_Db_Abstract {
         return $version;
     }
     
-    public function getAllPush(){
+    public function getAllVersion(){
         $return = array();
         $queryVersion = $this->getAdapter()->select()
                 ->from($this->_name);
@@ -30,5 +30,14 @@ class Class_Db_Push_Ios_Version extends Class_Db_Abstract {
         }
         
         return $return;
+    }
+    
+    
+    public function updateVersion($aData,$versionId){
+        
+        $return = $this->fetchRow($this->select()
+                               ->where("id = $versionId"))->setFromArray($aData)->save();
+       
+    	return $return;
     }
 }

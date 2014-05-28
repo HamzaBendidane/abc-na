@@ -85,13 +85,14 @@ class Widgets_Controllers_Table extends Widgets_Controllers_Abstract {
             $user_right = $user->type;
             
             $active_controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
-            
+            $active_action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+            $active_action = ($active_action != 'index')?$active_action:"";
             foreach ($this->data as $key => $value) {
             
                 $view_actions = '';
 
                // if($acl->isAllowed($user_right, $active_controller, 'update' )){
-                    $view_actions .= $this->view->partial('actions/update.phtml', array('active_controller' => $active_controller, 'id' => $value['id']));
+                    $view_actions .= $this->view->partial('actions/update.phtml', array('active_controller' => $active_controller,'active_action' => $active_action, 'id' => $value['id']));
                // }
                // if($acl->isAllowed($user_right, $active_controller, 'delete' )){
                     $view_actions .= $this->view->partial('actions/delete.phtml', array('active_controller' => $active_controller, 'id' => $value['id']));

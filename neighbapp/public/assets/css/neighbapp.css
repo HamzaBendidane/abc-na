@@ -33,3 +33,21 @@ body{
     margin-right: 10px;
     background-image:url('/assets/images/remove.png');
 }
+
+#valided {
+    
+	border-radius: 50%;
+	width: 20px;
+	height: 20px; 
+	/* width and height can be anything, as long as they're equal */
+        background-color: greenyellow;
+}
+
+#rejected {
+    
+	border-radius: 50%;
+	width: 20px;
+	height: 20px; 
+	/* width and height can be anything, as long as they're equal */
+        background-color: red;
+}

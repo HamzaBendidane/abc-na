@@ -76,8 +76,21 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
             'certificate_dev',
             'rate'
         );
-
-        $this->view->table = $this->view->widget('Table', $this->_pushApi->GetAllPushVersion(), array('crud' => true, 'fields' => $fields));
+        $versions = $this->_pushApi->GetAllPushVersion();
+        foreach ($versions as $key => $version){
+            if(file_exists($version["certificate_prod"])){
+                $versions[$key]["certificate_prod"] = '<div id="valided"></div>';
+            }else{
+                $versions[$key]["certificate_prod"] = '<div id="rejected"></div>';
+            }
+            if(file_exists($version["certificate_dev"])){
+                $versions[$key]["certificate_dev"] = '<div id="valided"></div>';
+            }else{
+                $versions[$key]["certificate_dev"] = '<div id="rejected"></div>';
+            }
+        }
+     
+        $this->view->table = $this->view->widget('Table', $versions, array('crud' => true, 'fields' => $fields));
     }
     
     
@@ -124,8 +137,93 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
     /**
      * update a user
      */
+    public function deviceupdateAction()
+    {   
+        $device_data = $this->_pushApi->GetDeviceTestById($this->_request->getParam('id'));
+        $this->view->headTitle(_("Device : ") . $device_data['name']);
+        
+        $form = new Class_Form_Bootstrap_PushDevice();
+        $data = array('data' => $device_data);
+        $form->populate($data);
+        
+        $this->view->form = $form;
+
+        $request = $this->getRequest();
+        if($request->isPost()){
+            if( $form->isValid($request->getPost())){
+
+                 $data = $request->getPost('data');
+                 
+                 $this->_pushApi->updateDeviceTest($data, $device_data['id']);
+                 
+                 $this->_helper->redirector('device', 'push', 'Backoffice');
+            }
+            
+        }
+        
+        
+    }
+    
+    /**
+     * update a user
+     */
+    public function versionupdateAction()
+    {   
+        $version_data = $this->_pushApi->GetVersionById($this->_request->getParam('id'));
+        $this->view->headTitle(_("Version : ") . $version_data['name']);
+
+        $this->view->data = $version_data;
+
+        $request = $this->getRequest();
+        if($request->isPost()){
+            $data = $_FILES;
+
+            $path = $_FILES['certificate_prod']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            if($ext == "pem"){
+                $target_path_prod = $this->_config->certificat_prod."$version_data[id]/";
+                $target_path_prod = $target_path_prod . basename( $_FILES['certificate_prod']['name']); 
+                move_uploaded_file($_FILES['certificate_prod']['tmp_name'], $target_path_prod);
+            }else{
+                $this->view->error = true;
+                $this->view->message = "Certificat prod extension must be in .pem";
+                return;
+            }
+            
+            $path = $_FILES['certificate_dev']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            if($ext == "pem"){
+                $target_path_dev = $this->_config->certificat_dev."$version_data[id]/";
+                $target_path_dev = $target_path_dev . basename( $_FILES['certificate_dev']['name']); 
+                move_uploaded_file($_FILES['certificate_dev']['tmp_name'], $target_path_dev);
+            }else{
+                $this->view->error = true;
+                $this->view->message = "Certificat dev extension must be in .pem";
+                return;
+            }
+            
+
+            $data = $request->getPost('data');
+            $data['certificate_dev'] = $target_path_dev;
+            $data['certificate_prod'] = $target_path_prod;
+            $this->_pushApi->UpdateVersion($data, $version_data['id']);
+
+            $this->_helper->redirector('version', 'push', 'Backoffice');
+            
+        }
+        
+        
+    }
+    
+    /**
+     * update a user
+     */
     public function updateAction()
     {   
+        
+        $versions = $this->_pushApi->GetAllPushVersion();
+        $this->view->versions = $versions;
+        
         $user_data = $this->_userApi->getUsrById($this->_request->getParam('id'));
                 
         $this->view->headTitle(_("User : ") . $user_data['firstname'] . ' ' . $user_data['lastname']);
@@ -140,6 +238,7 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
 
         $request = $this->getRequest();
         if($request->isPost()){
+            die(var_dump($request->getPost()));
             if( $form->isValid($request->getPost())){
                     
                  $data = $request->getPost('data');
