@@ -40,4 +40,29 @@ class Class_Db_Push_Ios_Version extends Class_Db_Abstract {
        
     	return $return;
     }
+    
+    
+    
+    /**
+     * Creation of User
+     * @param Array $data
+     * @return Boolean 
+     */
+    public function insertVersion($data){
+        try {
+            $aData = array(
+                "rate" => $data['rate'],
+                "name" => $data['name']
+            );
+            
+            $creation = $this->getAdapter()->insert($this->_name,$aData);
+            if($creation === 1){
+                return $this->getAdapter()->lastInsertId();
+            }else{
+                return false;
+            }
+        } catch (Exception $exc) {
+            return false;
+        }
+    }
 }

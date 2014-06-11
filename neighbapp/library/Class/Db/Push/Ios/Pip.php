@@ -95,4 +95,23 @@ class Class_Db_Push_Ios_Pip extends Class_Db_Abstract {
         }
         return $return;
     }
+    
+    public function updatePipAll($aData,$pipid){
+        
+        
+        $return = $this->fetchRow($this->select()
+                               ->where("id = $pipid"))->setFromArray($aData)->save();
+       
+    	return $return;
+    }
+    
+    public function createPip($aData){
+        $createPip = array(
+            "message" => $aData['message'],
+            "start_time" => $aData['start_time'],
+            "version_id" => $aData['version_id'],
+            "message" => $aData['message'],
+        );
+        $this->getAdapter()->insert($this->_name,$createPip);
+    }
 }

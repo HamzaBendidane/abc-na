@@ -2,5 +2,5 @@
        print($this->url(array(
                    "module" => 'Backoffice',
                    "controller" => $this->active_controller,
-                   "action" => 'add')));
+                   "action" => $this->active_action.'add')));
        ?>'><?php print(_('Add')); ?></a>

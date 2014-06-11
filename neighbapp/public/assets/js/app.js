@@ -10,6 +10,7 @@ requirejs.config({
       "highcharts" :            "highcharts/highcharts",      
       "daterangepicker":        "daterange/daterangepicker",
       "daterangepickerset":     "daterange/daterangepickerset",
+      "bootstrap-datetimepicker":     "daterange/bootstrap-datetimepicker",
       "moment":                 "daterange/moment",
       'datatables':             "datatables/jquery.datatables",
       'datatables-tabletools':  "datatables/datatables.tabletools"

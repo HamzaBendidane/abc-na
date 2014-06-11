@@ -18,6 +18,7 @@ class Class_Common_Label {
             'name'=> "Application Version",
             'message'=>    "Message",
             'start_time' => "Send Time",
+            'start_date' => "Send Time",
             'state'=>  "State",
             'certificate_prod'=>  "Production certificate",
             'certificate_dev'=>  "Development certificate",

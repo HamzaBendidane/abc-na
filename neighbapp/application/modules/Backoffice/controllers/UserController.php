@@ -39,13 +39,13 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
             'firstname'
         );
 
-        $this->view->table = $this->view->widget('Table', $this->_userApi->GetAllUsers(), array('crud' => true, 'fields' => $fields));
+        $this->view->table = $this->view->widget('Table', $this->_userApi->GetAllUsers(), array('crud' => true, 'fields' => $fields,"action" => array("add","update","delete")));
     }
         
     /**
      * add a user
      */
-    public function addAction()
+    public function useraddAction()
     {   
         $this->view->headTitle(_("Add user"));
         
@@ -69,9 +69,9 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
     /**
      * update a user
      */
-    public function updateAction()
+    public function userupdateAction()
     {   
-        $user_data = $this->_userApi->getUsrById($this->_request->getParam('id'));
+        $user_data = $this->_userApi->getUesrById($this->_request->getParam('id'));
                 
         $this->view->headTitle(_("User : ") . $user_data['firstname'] . ' ' . $user_data['lastname']);
         
@@ -102,7 +102,7 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
     /**
      * delete a user
      */
-    public function deleteAction()
+    public function userdeleteAction()
     {   
        $form = new Class_Form_Bootstrap_Delete();
        $form->setId($this->_request->getParam('id'));

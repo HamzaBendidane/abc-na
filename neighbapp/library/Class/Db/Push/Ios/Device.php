@@ -95,18 +95,14 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
             return false;
         }
     }
-
     
-    public function getAllPushDevice(){
-        
-        $return = array();
-        $queryPip = $this->getAdapter()->select()
-                ->from("ios_devices_test");
-        $pips = $this->getAdapter()->query($queryPip);
-        
-        while($pip = $pips->fetch()){
-            $return[] = $pip;
-        }
-        return $return;
+    /**
+     * Delete an user
+     * @author Jeyaganesh Ranjit
+     * @param int $idUser
+     * @return boolean
+     */
+    public function deleteDevice($idDevice){
+        return $this->getAdapter()->delete($this->_name, "id = $idDevice");
     }
 }

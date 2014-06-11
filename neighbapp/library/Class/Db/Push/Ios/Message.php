@@ -99,4 +99,27 @@ class Class_Db_Push_Ios_Message extends Class_Db_Abstract {
         }
         return $return;
     }
+    
+    public function createPushTest($aData){
+        $start_time = date("Y-m-d H:i:s");
+        $apiModel = new Class_Db_Push_Ios_DeviceTest();
+        $device = $apiModel->getDeviceTestById($aData['device_id']);
+        $createMessage = array(
+            'message'       => $aData['message'],
+            'delivery'      => date('Y-m-d H:i:s'),
+            'status'        => "queued",
+            'token'         => $device['token'],
+            'created'       => date('Y-m-d H:i:s'),
+            'push_test'     => 1,
+            'modified'      => null,
+            'start_date'    => $start_time,
+            'device_id'     => $aData['device_id'],
+            'version_id'    => $aData['version_id'],
+            'pip_id'        => false,
+            'user_id'       => false,
+            'campaign_id'   => false
+        );
+        $this->getAdapter()->insert($this->_name,$createMessage);
+        return true;
+    }
 }

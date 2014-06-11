@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h2 class="panel-title"><?php print(_('Add Version Application')) ?></h2>
+            </div>
+            <div class="panel-body">
+                
+                <?php if($this->error) : ?>
+                <div class="bs-component">
+                        <div class="alert alert-dismissable alert-danger">
+                            <button data-dismiss="alert" class="close" type="button">×</button>
+                            <strong><?= $this->message?></strong>
+                        </div>
+                        <div class="btn btn-primary btn-xs" id="source-button" style="display: none;">&lt; &gt;</div></div>
+                <?php endif; ?>
+                <form method="post" action="" class="form-horizontal" enctype="multipart/form-data" id="device_test">
+
+
+                    <div class="form-group ">
+                        <label class="col-sm-2 control-label required" for="data-version">Version</label>
+                        <div class="col-sm-3">
+                            <input type="text" required="" class="form-control col-sm-3" placeholder="Version" id="data-name" name="data[name]">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label required" for="data-certificate_prod">Certificat Prod</label>
+                        <div class="col-sm-3">
+                            <input required=""  accept="*.pem" name='certificate_prod' type="file" id="fileInput" id="data-certificate_prod" name="data[certificate_prod]" class="input-file" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label required" for="data-certificate_dev">Certificat Dev</label>
+                        <div class="col-sm-3">
+                            <input required=""  accept="*.pem" name='certificate_dev' type="file" id="fileInput" id="data-certificate_dev" name="data[certificate_dev]" class="input-file" >
+                        </div>
+                    </div>
+
+                    <div class=" form-group ">
+                        <label class="col-sm-2 control-label required" for="data-rate">Rate</label>
+                        <div class="col-sm-3">
+                            <input type="text" required="" class="form-control col-sm-3" placeholder="Rate" id="data-rate" name="data[rate]">
+                        </div>
+                    </div>
+                    <div class=" form-group "><div class="col-sm-offset-2 col-sm-3">
+                            <input type="submit" class="btn btn-default" buttons="danger info primary success warning inverse link" value="submit" id="data-submit" name="data[submit]">
+                        </div>
+                    </div>
+                </form>
+                <?php //var_dump($this->data); ?>
+                <a class="btn btn-default" href="<?php print($this->url(array('module' => 'Backoffice', 'controller' => 'push', 'action' => 'version'), null, true)); ?>">
+                    <i class="icon-chevron-left"></i>
+                    <?php print(_('annuler')); ?></a>
+            </div>
+        </div>
+    </div>
+</div>

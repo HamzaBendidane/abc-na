@@ -116,6 +116,14 @@ class Api_Push extends Api_Abstract{
         return $allPush;
     }
     
+    public function GetPushById($pushId){
+        
+        $pipModel = new Class_Db_Push_Ios_Pip();
+        $push = $pipModel->getPipById($pushId);
+        
+        return $push;
+    }
+    
     public function GetAllPushVersion(){
         
         $pipModel = new Class_Db_Push_Ios_Version();
@@ -134,7 +142,7 @@ class Api_Push extends Api_Abstract{
     
     public function GetAllPushDevice(){
         
-        $pipModel = new Class_Db_Push_Ios_Device();
+        $pipModel = new Class_Db_Push_Ios_DeviceTest();
         $allPush = $pipModel->getAllPushDevice();
         
         return $allPush;
@@ -170,5 +178,75 @@ class Api_Push extends Api_Abstract{
         $version = $versionModel->updateVersion($aData,$versionId);
         
         return $version;
+    }
+    
+    
+    public function UpdatePipAll($aData,$pipId){
+        
+        $pipModel = new Class_Db_Push_Ios_Pip();
+        $pipId = $pipModel->updatePipAll($aData,$pipId);
+        
+        return $pipId;
+    }
+    
+    /**
+     * Delete a User
+     * @author Jeyaganesh Ranjit
+     * @param int $idUser
+     * @return Boolean
+     */
+    public function DeleteDevice($idDevice){
+        if(!is_numeric($idDevice)){
+            return false;
+        }
+        $deviceModel = new Class_Db_Push_Ios_DeviceTest();
+        
+        $result = $deviceModel->deleteDeviceTest($idDevice);
+        
+        return $result;
+    }
+    
+    public function CreateDeviceTest($aData){
+        $model = new Class_Db_Push_Ios_DeviceTest();
+        return $model->createDevice($aData);
+    }
+    
+    public function InsertVersion($aData){
+        $model = new Class_Db_Push_Ios_Version();
+        return $model->insertVersion($aData);
+    }
+    
+    public function GetListVersion(){
+        $tabVersion = array();
+        $pipModel = new Class_Db_Push_Ios_Version();
+        $allPush = $pipModel->getAllVersion();
+        
+        foreach($allPush as $version){
+            $tabVersion[$version['id']] = $version['name'];
+        }
+        return $tabVersion;
+    }
+    
+    public function GetListDevice(){
+        $tabVersion = array();
+        
+        $pipModel = new Class_Db_Push_Ios_DeviceTest();
+        $allPush = $pipModel->getAllPushDevice();
+        
+        foreach($allPush as $version){
+            $tabVersion[$version['id']] = $version['name'];
+        }
+        
+        return $tabVersion;
+    }
+    
+    public function CreatePushTest($aData){
+        $model = new Class_Db_Push_Ios_Message();
+        return $model->createPushTest($aData);
+    }
+    
+    public function CreatePushPip($aData){
+        $model = new Class_Db_Push_Ios_Pip();
+        return $model->createPip($aData);
     }
 }
