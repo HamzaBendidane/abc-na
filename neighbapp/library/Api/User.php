@@ -189,4 +189,33 @@ class Api_User extends Api_Abstract {
         $userModel = new Class_Db_Uaccounts();
         return $userModel->GetAllUsers();
     }
+    
+    public function DeleteUser($userId){
+        $userModel = new Class_Db_Uaccounts();
+        $userModel->deleteUser($userId);
+    }
+    
+    public function GetUserById($userId){
+        $userModel = new Class_Db_Uaccounts();
+        return $userModel->getUserById($userId);
+    }
+    
+    public function UpdateUaccount($aData,$userId){
+        $userModel = new Class_Db_Uaccounts();
+        $update = array(
+            'firstname' => $aData['firstname'],
+            'lastname' => $aData['lastname'],
+            'email' => $aData['email'],
+            'password' => $aData['password'],
+            'gender' => $aData['gender'],
+            'phone_number' => $aData['phone_number'],
+            'fax_number' => $aData['fax_number'],
+        );
+        return $userModel->updateUaccount($update,$userId);
+    }
+    
+    public function CreateUaccount($aData){
+        $userModel = new Class_Db_Uaccounts();
+        $userModel->createUaccount($aData);
+    }
 }

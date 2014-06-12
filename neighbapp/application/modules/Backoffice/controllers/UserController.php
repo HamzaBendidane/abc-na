@@ -58,7 +58,7 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
                     
                  $data = $request->getPost('data');
                  
-                 $this->_userApi->createUser($data);
+                 $this->_userApi->CreateUaccount($data);
                  
                  $this->_helper->redirector('index', 'user', 'Backoffice');
             }
@@ -71,10 +71,10 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
      */
     public function userupdateAction()
     {   
-        $user_data = $this->_userApi->getUesrById($this->_request->getParam('id'));
+        $user_data = $this->_userApi->GetUserById($this->_request->getParam('id'));
                 
         $this->view->headTitle(_("User : ") . $user_data['firstname'] . ' ' . $user_data['lastname']);
-        
+
         $form = new Class_Form_Bootstrap_User();
         $data = array('data' => $user_data);
         $form->populate($data);
@@ -88,8 +88,8 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
             if( $form->isValid($request->getPost())){
                     
                  $data = $request->getPost('data');
-       
-                 $this->_userApi->updateUser($data, $user_data['id']);
+
+                 $this->_userApi->UpdateUaccount($data,$this->_request->getParam('id'));
                  
                  $this->_helper->redirector('index', 'user', 'Backoffice');
             }
@@ -104,19 +104,15 @@ class Backoffice_UserController extends Class_Controller_BackofficeAction
      */
     public function userdeleteAction()
     {   
-       $form = new Class_Form_Bootstrap_Delete();
-       $form->setId($this->_request->getParam('id'));
-       $this->view->form = $form;
-       
+        
+        $id = $this->_request->getParam('id');
+        $this->view->id = $id;
         if($this->_request->isPost()){
-            if( $form->isValid($this->_request->getPost()) ){
-                    
-                 if($this->_request->getParam('valide')){
-                     $this->_userApi->deleteUser($this->_request->getParam('id'));
-                     $this->_helper->redirector('index', 'user', 'Backoffice');
-                 }else{
-                     $this->_helper->redirector('index', 'user', 'Backoffice');
-                 }
+            if($this->_request->getParam('valide')){
+                $this->_userApi->DeleteUser($this->_request->getParam('id'));
+                $this->_helper->redirector('index', 'user', 'Backoffice');
+            }else{
+                $this->_helper->redirector('index', 'user', 'Backoffice');
             }
         }
     }
