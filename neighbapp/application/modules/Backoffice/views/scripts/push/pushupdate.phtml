@@ -18,17 +18,28 @@
                     <div class=" form-group "><label class="col-sm-2 control-label required" for="data-message">Message</label>
                         <div class="col-sm-5">
                             <textarea rows="3" required="" class="form-control col-sm-3" id="data-message" name="data[message]"><?= $this->data['message'] ?></textarea></div></div>
+                            
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label required" for="data-version_id">Start time</label>
-                        <div class='col-sm-5 input-group date' id='datetimepicker1'>
-                            <input id="data-start_time" name="data[start_time]" type='text' class="form-control" />
+                        <div style='padding: 0px 15px' class='col-sm-5 input-group date' id='datetimepicker1'>
+                            <input value='<?= date('d/m/Y h:i A',  strtotime($this->data['start_time'])) ?>' id="data-start_time" name="data[start_time]" type='text' class="form-control" />
                             <span  class="input-group-addon"><span class="icon-calendar"></span>
                             </span>
                         </div>
                     </div>
+                    
+                    <div class=" form-group "><label class="col-sm-2 control-label required" for="data-message">Statistics</label>
+                        <div class="col-sm-5">
+                            <button class="btn btn-default btn-sm" id="simuler" type="button">Simuler</button>
+                            <span id="simuler_action"></span>
+                        </div>    
+                    </div>
+                            
+                    
                     <div class=" form-group "><div class="col-sm-offset-2 col-sm-3">
-                            <input type="submit" class="btn btn-default" buttons="danger info primary success warning inverse link" value="submit" id="data-submit" name="data[submit]"></div></div>
+                            <input type="submit" class="btn btn-primary" buttons="danger info primary success warning inverse link" value="submit" id="data-submit" name="data[submit]"></div></div>
+                         
                 </form>
 
                 <a class="btn btn-default" href="<?php print($this->url(array('module' => 'Backoffice', 'controller' => 'push', 'action' => 'index'), null, true)); ?>">
@@ -40,10 +51,29 @@
 </div>
 
 <script>
-    requirejs(['main','moment', 'bootstrap-datetimepicker'], function() {
     
+    requirejs(['main','moment', 'bootstrap-datetimepicker'], function() {
+        
         $(function () {
-            $('#datetimepicker1').datetimepicker();
+            $('#datetimepicker1').datetimepicker({ dateFormat: 'dd-mm-yy', timeFormat: 'hh:mm:ss' });
         });
+        
+        $('#simuler').click(function(){
+            var version_id = $('#data-version_id').val();
+
+            var request = $.ajax({
+                url: "/push/simuler",
+                type: "POST",
+                data: { version_id : version_id },
+                dataType: "json"
+            });
+            request.done(function( json ) {
+                $('#simuler_action').text(json.total+' users to push');
+            });
+            request.fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+            });
+        });
+        
     });
 </script>

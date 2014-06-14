@@ -64,7 +64,7 @@ class Class_Db_Push_Ios_Pip extends Class_Db_Abstract {
         $return = array();
         $queryPip = $this->getAdapter()->select()
                 ->from($this->_name)
-                ->join("ios_version", "$this->_name.version_id = ios_version.id");
+                ->join("ios_version", "$this->_name.version_id = ios_version.id",array('name'));
         $pips = $this->getAdapter()->query($queryPip);
         
         while($pip = $pips->fetch()){

@@ -249,4 +249,9 @@ class Api_Push extends Api_Abstract{
         $model = new Class_Db_Push_Ios_Pip();
         return $model->createPip($aData);
     }
+    
+    public function GetTotalPush($version_id){
+        $model = new Class_Db_Push_Ios_Device();
+        return $model->getTotalPush($version_id);
+    }
 }

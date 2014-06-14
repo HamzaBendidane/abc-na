@@ -105,4 +105,15 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
     public function deleteDevice($idDevice){
         return $this->getAdapter()->delete($this->_name, "id = $idDevice");
     }
+    
+    public function getTotalPush($version_id){
+        $queryDevice = $this->getAdapter()->select()
+                ->from($this->_name,'count(*) as total')
+                ->where("version_id = ?", $version_id)
+                ->where("pushbadge = 'enabled' OR pushalert = 'enabled' OR pushsound = 'enabled'");
+            
+        $device = $this->getAdapter()->fetchRow($queryDevice);        
+        
+        return $device;
+    }
 }

@@ -239,6 +239,7 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
         $request = $this->getRequest();
         if($request->isPost()){
             $data = $request->getPost('data');
+            die(var_dump($data));
             $data['start_time'] = date('Y-m-d H:i:s',strtotime($data['start_time']));
             $this->_pushApi->UpdatePipAll($data, $push['id']);
             $this->_helper->redirector('index', 'push', 'Backoffice');
@@ -371,6 +372,17 @@ class Backoffice_PushController extends Class_Controller_BackofficeAction
             $data['start_time'] = date('Y-m-d H:i:s',strtotime($data['start_time']));
             $this->_pushApi->CreatePushPip($data);
             $this->_helper->redirector('index', 'push', 'Backoffice');
+        }
+    }
+    
+    public function simulerAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(TRUE);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            $totalPush = $this->_pushApi->GetTotalPush($data['version_id']);
+            echo json_encode($totalPush);
         }
     }
 }
