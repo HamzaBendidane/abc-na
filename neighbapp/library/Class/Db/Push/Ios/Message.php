@@ -10,7 +10,7 @@ class Class_Db_Push_Ios_Message extends Class_Db_Abstract {
     protected $_name = 'ios_message';
     protected $_adapter = 'neighbapp';
     
-    public function addMessage($message,$versionId,$deviceId,$pipId,$token,$start_time = null,$push_test = 0,$userId = null,$campaignId = null){
+    public function addMessage($message,$versionId,$pipId,$token,$start_time = null,$push_test = 0,$userId = null){
         if(!$start_time){
             $start_time = date("Y-m-d H:i:s");
         }
@@ -24,12 +24,11 @@ class Class_Db_Push_Ios_Message extends Class_Db_Abstract {
             'push_test'     => $push_test,
             'modified'      => null,
             'start_date'    => $start_time,
-            'device_id'     => $deviceId,
             'version_id'    => $versionId,
             'pip_id'        => $pipId,
-            'user_id'       => $userId,
-            'campaign_id'   => $campaignId
+            'user_id'       => $userId
         );
+
         $this->getAdapter()->insert($this->_name,$createMessage);
         return true;
     }

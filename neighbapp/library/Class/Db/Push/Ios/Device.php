@@ -116,4 +116,21 @@ class Class_Db_Push_Ios_Device extends Class_Db_Abstract {
         
         return $device;
     }
+    
+    
+    public function getAllDevice($version_id){
+        
+        $return = array();
+        $query = $this->getAdapter()->select()
+                ->from($this->_name)
+                ->where("version_id = ?",$version_id)
+                ->where("pushbadge = 'enabled' OR pushalert = 'enabled' OR  pushsound = 'enabled'")
+                ->where("status = 'active'");
+        $query = $this->getAdapter()->query($query);
+        
+        while($device = $query->fetch()){
+            $return[] = $device;
+        }
+        return $return;
+    }
 }

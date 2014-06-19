@@ -12,57 +12,18 @@
 require_once realpath(dirname(__FILE__)).'/../Abstract.php';
 class Cron_Push_PipAbstract  extends Cron_Abstract {
     
-    protected $_tab = array('3applis','appoclock','appdusoir');
     public function addMessages(){
         $this->connect();
         try {
-            die('ok');
             $pips = $this->getWaintingPip();
-            foreach($pips as $pip){
-                $this->updatePip($pip['id'],2);
-                $version = $this->getVersionById($pip['version_id']);
-                // On récupère tout les device pushable
-                //$relance = ($pip['relance_push'] == 1 )?true:false;
-                /*
-                 * Add Abdel 
-                 * diff relance !!!
-                 */
-                
-                switch ($pip['relance_push']) {
-                    case '1':
-                        $relance = 1;
-                        break;
-                    case '2':
-                        $relance = 2;
-                        break;
-                    default:
-                        $relance = 0;
-                        break;
-                }
-                $allDevice = $this->getAllDevice($pip['campaign_FK'],$relance,$version['appname'],$version['type']);
-                $campaign = $this->getCampagnById($pip['campaign_FK']);
-                foreach($allDevice as $device){
-                	 
-                	if (!in_array($version['appname'], $this->_tab)) {
-                		$alreadyDonwload = false;
 
-                		if($relance == 0){ //PUSH ALL
-                			$this->addMessage($pip,$device);
-                		}elseif($relance == 1){ //PUSH RELANCE
-                			$participate = $this->hasParticipate($device['user_FK'],$pip['campaign_FK']);
-                			$alreadyDonwload = $this->alreadyDonwloadApplication($campaign['application_FK'],$device['user_FK'],$pip['campaign_FK']);
-                			if(!$participate && !$alreadyDonwload)
-                			$this->addMessage($pip,$device);
-                		}else{ //PUSH EN COURS
-                			$participate = $this->hasParticipate($device['user_FK'],$pip['campaign_FK']);
-                			if($participate['status'] != 1 && $participate)
-                			$this->addMessage($pip,$device);
-                		}
-                	}else{
-                		$device['id'] = $device['device_FK'];
-                		$device['user_FK'] = ''; //PAS DE USER DANS NOTRE BASE DE DONNEE POUR APPDUSOIR, 3APPLIS, APPOCLOCK
-                		$this->addMessage($pip,$device);
-                	}
+            foreach($pips as $pip){
+                
+                $this->updatePip($pip['id'],2);
+
+                $allDevice = $this->getAllDevice($pip['version_id']);
+                foreach($allDevice as $device){
+                    $this->addMessage($pip,$device);
                 }
             }
             if(date('H') == 00)

@@ -35,19 +35,10 @@ class Cron_Push_PipIos  extends Cron_Push_PipAbstract {
         return $pip;
     }
     
-    protected function getAllDevice($campaignId,$relance,$appname,$type = null){
+    protected function getAllDevice($version_id){
         
-         $deviceModel = new Class_Db_Device();
-         $pushDeviceModel = new Class_Db_Push_Ios_Device();
-         if (in_array($appname, $this->_tab)) {
-         	$allDevice = $pushDeviceModel->getPushBlogActivate($appname);
-         }else if($relance==1){
-            $allDevice = $deviceModel->getPushRelance($campaignId,$appname,$type);
-         }else if($relance==2){
-         	$allDevice = $deviceModel->getPushRelanceEnCours($campaignId,$appname,$type);
-         }else{
-            $allDevice = $deviceModel->getPushActivate($campaignId,$appname,$type);
-         }    
+         $deviceModel = new Class_Db_Push_Ios_Device();
+         $allDevice = $deviceModel->getAllDevice($version_id);
          
          return $allDevice;
     }
@@ -83,7 +74,7 @@ class Cron_Push_PipIos  extends Cron_Push_PipAbstract {
     protected function addMessage($pip,$device){
          $messageModel = new Class_Db_Push_Ios_Message();
          try {
-            $allDevice = $messageModel->addMessage($pip['message'], $pip['version_id'], $device['id'], $pip['id'],$device['devicetoken'],$pip['start_time'],0,$device['user_FK'],$pip['campaign_FK']);
+            $allDevice = $messageModel->addMessage($pip['message'], $pip['version_id'], $pip['id'],$device['devicetoken'],$pip['start_time'],0,$device['user_FK']);
          } catch (Exception $exc) {
              echo 'ERROR ADD MESSAGE '.$exc->getMessage();
          }
@@ -196,7 +187,7 @@ class Cron_Push_PipIos  extends Cron_Push_PipAbstract {
     }
     
     protected function disconnect(){
-        $db = Zend_Registry::get('iosdb');
+        $db = Zend_Registry::get('neighbapp');
         $db->closeConnection();
     }
     
